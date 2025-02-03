@@ -1,6 +1,6 @@
 export const config = {
 	project: {
-		name: "EligibleSchool",
+		name: "Eligible School",
 		slogan: "Empowering Futures with Cutting-Edge Technology Education",
 		description:
 			"Eligible School offers top-notch technology courses designed to equip you with the skills needed for tomorrow's tech-driven world. Join us to advance your career and stay ahead in the digital era with our expert-led training and innovative learning solutions.",
