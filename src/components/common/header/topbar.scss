@@ -1,0 +1,21 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.topbar{
+    background-color: $color2;
+    color:$color4;
+    padding: 10px 0;
+
+    .container{
+        @include flexbox();
+    }
+
+    .slogan{
+        display: none;
+
+        @media(min-width: 992px) {
+            display: block;
+        }
+
+    }
+}

@@ -1,0 +1,35 @@
+@use "./variables" as *;
+
+@mixin reset-list($margin: 0, $padding: 0) {
+	margin: $margin;
+	padding: $padding;
+	list-style-type: none;
+}
+
+@mixin fligran($color: gray, $opacity: 0.5) {
+	background-color: rgba($color, $opacity);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+@mixin flexbox($fd: row, $jc: space-between, $ai: stretch, $gap: 0) {
+	display: flex;
+	flex-direction: $fd;
+	justify-content: $jc;
+	align-items: $ai;
+	gap: $gap;
+}
+
+@mixin shadow($type, $val) {
+	#{$type}-shadow: $val;
+}
+
+
+@mixin borderRadius($radius) {
+	@each $v in $vendors {
+		#{$v}border-radius: $radius;
+	}
+}

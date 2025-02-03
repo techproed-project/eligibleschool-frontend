@@ -1,9 +1,22 @@
-import React from 'react'
+import { config } from "@/helpers/config";
+import React from "react";
+import { Container } from "react-bootstrap";
+import "./topbar.scss";
 
 const Topbar = () => {
-  return (
-    <div>Topbar</div>
-  )
-}
+	return (
+		<div className="topbar">
+			<Container>
+				<div className="slogan">
+					<i className="pi pi-megaphone"></i> {config.project.slogan}
+				</div>
 
-export default Topbar
+				<div>
+					<i className="pi pi-user"></i> Login
+				</div>
+			</Container>
+		</div>
+	);
+};
+
+export default Topbar;
