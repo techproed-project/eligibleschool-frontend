@@ -1,0 +1,27 @@
+[
+	{
+		"title": "Home",
+		"link": "/",
+		"icon": "pi pi-home"
+	},
+	{
+		"title": "Courses",
+		"link": "/courses",
+		"icon": "pi pi-book"
+	},
+	{
+		"title": "Events",
+		"link": "/events",
+		"icon": "pi pi-calendar"
+	},
+	{
+		"title": "About",
+		"link": "/about",
+		"icon": "pi pi-info-circle"
+	},
+	{
+		"title": "Contact",
+		"link": "/contact",
+		"icon": "pi pi-phone"
+	}
+]
