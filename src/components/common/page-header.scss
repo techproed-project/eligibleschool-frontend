@@ -1,0 +1,12 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.page-header {
+	background-image: linear-gradient(50deg, $color3, $color1, $color3);
+	text-align: center;
+	padding: 25px 0;
+	font-weight: 600;
+	letter-spacing: 0.3rem;
+	color: $color5;
+	@include shadow(text, 0 5px 10px $color4-op-70);
+}

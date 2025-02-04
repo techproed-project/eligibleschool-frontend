@@ -38,3 +38,9 @@
 		#{$v}transform: $val;
 	}
 }
+
+@mixin transition($val) {
+	@each $v in $vendors {
+		#{$v}transition: $val;
+	}
+}

@@ -1,14 +1,23 @@
-import React from 'react'
+import { PageHeader } from "@/components/common/page-header";
+import { Spacer } from "@/components/common/spacer";
+import { Courses } from "@/components/courses/courses";
+import React from "react";
 
 export const metadata = {
-    title: "Courses",
-    description: "Explore the variety of courses offered by our educational institution.",
-}
+	title: "Courses",
+	description:
+		"Explore the variety of courses offered by our educational institution.",
+};
 
 const Page = () => {
-  return (
-    <div>Page</div>
-  )
-}
+	return (
+		<>
+			<PageHeader title="Courses" />
+            <Spacer/>
+            <Courses/>
+            <Spacer/>
+		</>
+	);
+};
 
-export default Page
+export default Page;
