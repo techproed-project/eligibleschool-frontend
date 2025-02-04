@@ -27,9 +27,14 @@
 	#{$type}-shadow: $val;
 }
 
-
 @mixin borderRadius($radius) {
 	@each $v in $vendors {
 		#{$v}border-radius: $radius;
+	}
+}
+
+@mixin transform($val) {
+	@each $v in $vendors {
+		#{$v}transform: $val;
 	}
 }

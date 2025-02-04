@@ -1,0 +1,31 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.main-slider {
+	img {
+		display: block;
+		width: 100%;
+		height: calc(100vh - 120px);
+		object-fit: cover;
+		object-position: right top;
+
+		@media (min-width: 1200px) {
+			object-position: right center;
+		}
+	}
+
+	.carousel-caption {
+		bottom: 50%;
+		@include transform(translateY(50%));
+		background-color: $color4-op-70;
+		padding: 20px;
+		@include borderRadius(5px);
+
+        @media(min-width: 992px) {
+            text-align: left;
+            background-color: transparent;
+            width: 45%;
+            color: $color4;
+        }
+	}
+}

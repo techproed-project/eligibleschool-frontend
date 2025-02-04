@@ -1,4 +1,4 @@
-import { config } from "@/helpers/config";
+import { appConfig } from "@/helpers/config";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -9,7 +9,7 @@ const Logo = () => {
 		<NavbarBrand href="/" as={Link}>
 			<Image
 				src="/img/logos/logo.png"
-				alt={config.project.name}
+				alt={appConfig.project.name}
 				width={208}
 				height={48}
 				priority

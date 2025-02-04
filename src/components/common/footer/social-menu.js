@@ -1,9 +1,9 @@
 "use client";
-import { config } from "@/helpers/config";
+import { appConfig } from "@/helpers/config";
 import React from "react";
 import { Nav } from "react-bootstrap";
 
-const menuItems = Object.entries(config.contact.socialMedia);
+const menuItems = Object.entries(appConfig.contact.socialMedia);
 
 const SocialMenu = (props) => {
 	return (

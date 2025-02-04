@@ -1,9 +1,9 @@
 "use client";
-import { config } from "@/helpers/config";
+import { appConfig } from "@/helpers/config";
 import React from "react";
 import { Nav } from "react-bootstrap";
 
-const menuItems = Object.entries(config.contact.info);
+const menuItems = Object.entries(appConfig.contact.info);
 
 const ContactMenu = (props) => {
 	return (

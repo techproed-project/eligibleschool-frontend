@@ -1,4 +1,4 @@
-export const config = {
+export const appConfig = {
 	project: {
 		name: "Eligible School",
 		slogan: "Empowering Futures with Cutting-Edge Technology Education",
