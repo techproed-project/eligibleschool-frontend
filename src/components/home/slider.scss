@@ -8,10 +8,6 @@
 		height: calc(100vh - 120px);
 		object-fit: cover;
 		object-position: right top;
-
-		@media (min-width: 1200px) {
-			object-position: right center;
-		}
 	}
 
 	.carousel-caption {
