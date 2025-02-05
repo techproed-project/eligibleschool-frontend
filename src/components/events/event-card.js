@@ -14,10 +14,10 @@ export const EventCard = (props) => {
 				</div>
 				<Card.Subtitle>
 					<span>
-						<i className="pi pi-user"></i> {time}
+						<i className="pi pi-clock"></i> {time}
 					</span>
 					<span>
-						<i className="pi pi-chart-line"></i> {location}
+						<i className="pi pi-map-marker"></i> {location}
 					</span>
 				</Card.Subtitle>
 				<Card.Title>{title}</Card.Title>

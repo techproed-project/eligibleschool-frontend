@@ -1,0 +1,30 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.mobile-app {
+	background-color: $color2;
+	position: relative;
+	bottom: -30px;
+    text-align: center;
+
+    
+	[class^="col"]:first-child {
+		padding: 40px;
+
+        @media(min-width:992px){
+            text-align: left;
+            padding: 40px 70px 40px 70px;
+        }
+	}
+
+    [class^="col"]:last-child {
+		padding: 0 40px 40px 40px;
+
+        @media(min-width:992px){
+            text-align: right;
+            padding: 40px 70px 40px 70px;
+            @include flexbox($jc: flex-end, $ai:center);
+            
+        }
+	}
+}
