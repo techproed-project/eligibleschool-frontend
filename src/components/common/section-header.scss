@@ -1,0 +1,11 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.section-header {
+	text-align: center;
+	font-weight: 600;
+	letter-spacing: 0.3rem;
+	color: $color4-op-70;
+	margin-bottom: 30px;
+	@include shadow(text, 0 5px 10px $color4-op-70);
+}

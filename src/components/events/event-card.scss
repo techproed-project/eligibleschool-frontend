@@ -1,0 +1,36 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.event-card {
+	height: 100%;
+	margin:0 10px;
+
+	.img-container {
+		position: relative;
+		height: 200px;
+		overflow: hidden;
+		@include borderRadius(5px);
+
+		img {
+			object-fit: cover;
+			@include transition(transform 0.3s ease-in-out);
+		}
+	}
+
+	.card-title {
+		margin-top: 20px;
+		color: $color3;
+	}
+
+	.card-subtitle {
+		margin: 10px 0;
+		@include flexbox();
+		color: $color2;
+	}
+
+	&:hover {
+		img {
+			@include transform(scale(1.1) rotate(2deg));
+		}
+	}
+}
