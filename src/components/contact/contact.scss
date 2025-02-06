@@ -1,0 +1,17 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.contact{
+    .container{
+        @include shadow(box, 0 5px 10px $color4-op-70);
+        @include transform(translateY(30px));
+        @include borderRadius(5px);
+        margin-top: -30px;
+
+        background-color: white;
+
+        [class^="col"]{
+            padding: 30px;
+        }
+    }
+}
