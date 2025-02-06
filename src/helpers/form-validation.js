@@ -13,6 +13,8 @@ export const response = (ok, message, errors) => {
 	};
 };
 
+export const initialState = response(false, "", {});
+
 export const transformYupErrors = (errors) => {
 	const errObject = {};
 	errors.forEach((error) => (errObject[error.path] = error.message));

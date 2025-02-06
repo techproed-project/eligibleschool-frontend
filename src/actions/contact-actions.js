@@ -19,7 +19,7 @@ export const createContactAction = async (prevState, formData) => {
 		const data = await res.json();
 
 		if (!res.ok) {
-			console.log(data);
+			return response(false, "", data?.validations);
 		}
 
 		// revalidation yapilacak

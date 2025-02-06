@@ -9,7 +9,7 @@ import { appConfig } from "@/helpers/config";
 
 const MainMenubar = () => {
 	return (
-		<Navbar expand="lg" className="bg-body-tertiary" sticky="top">
+		<Navbar expand="lg" className="bg-body-tertiary shadow" sticky="top">
 			<Container>
 				<Logo />
 				<Navbar.Toggle aria-controls="main-menubar" />
