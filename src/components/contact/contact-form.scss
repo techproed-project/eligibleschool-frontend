@@ -1,0 +1,20 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.contact-form{
+    .form-control{
+        border: none;
+        border-bottom: 1px solid $color1-op-70;
+        @include borderRadius(0);
+    }
+
+    .input-group-text{
+        border:none;
+        background: none;
+        color: $color1-op-70
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 0 .05rem $color1-op-70;
+    }
+}
