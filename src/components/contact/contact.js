@@ -9,7 +9,7 @@ const Contact = () => {
 	return (
 		<div className="contact">
 			<Container>
-				<Row className="g-4">
+				<Row>
 					<Col lg={8}>
 						<h2>Send Message</h2>
 						<ContactForm />
