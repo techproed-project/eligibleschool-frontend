@@ -1,0 +1,16 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.login-form {
+	.card {
+		@include shadow(box, 0 5px 15px $color4-op-70);
+        border-top:10px solid $color1;
+	}
+
+	h4 {
+		margin: 20px 0;
+		font-weight: 300;
+		font-style: italic;
+		font-size: 1.2rem;
+	}
+}

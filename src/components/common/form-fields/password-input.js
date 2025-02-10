@@ -1,9 +1,11 @@
+"use client"
 import React, { useState } from "react";
 import { FormControl, FormGroup, FormLabel, InputGroup } from "react-bootstrap";
 
 export const PasswordInput = (props) => {
 	const { label, error, className = "mb-3", ...rest } = props;
 	const [type, setType] = useState("password");
+	const [val, setVal] = useState("");
 
 	const handleClick = () => {
 		setType((prev) => (prev === "password" ? "text" : "password"));
@@ -18,6 +20,8 @@ export const PasswordInput = (props) => {
 					isInvalid={!!error}
 					size="lg"
 					type={type}
+					value={val}
+					onChange={(e) => setVal(e.target.value)}
 					{...rest}
 				/>
 				<InputGroup.Text
