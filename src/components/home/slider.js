@@ -13,7 +13,7 @@ export const Slider = () => {
 				<Carousel.Item key={item.id}>
 					<Image
 						src={`/img/slider/${item.image}`}
-						width={1800}
+						width={395}
 						height={800}
 						alt={item.title}
 					/>

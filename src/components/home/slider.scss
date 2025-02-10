@@ -2,12 +2,30 @@
 @use "../../styles/variables" as *;
 
 .main-slider {
+	.carousel-item {
+		height: calc(100vh - 120px);
+		background-image: linear-gradient(30deg, $color2, $color3, $color2);
+	}
+
 	img {
 		display: block;
-		width: 100%;
-		height: calc(100vh - 120px);
-		object-fit: cover;
-		object-position: right top;
+		height: 100%;
+		width: auto;
+		margin: 0 auto;
+		opacity: 0.4;
+
+		@media(min-width: 992px){
+			margin-right: 80px;
+			opacity: 1;
+		}
+
+		@media(min-width: 1200px){
+			margin-right: 150px;
+		}
+
+		@media(min-width: 1400px){
+			margin-right: 250px;
+		}
 	}
 
 	.carousel-caption {
@@ -17,11 +35,11 @@
 		padding: 20px;
 		@include borderRadius(5px);
 
-        @media(min-width: 992px) {
-            text-align: left;
-            background-color: transparent;
-            width: 45%;
-            color: $color4;
-        }
+		@media (min-width: 992px) {
+			text-align: left;
+			background-color: transparent;
+			width: 45%;
+			color: $color4;
+		}
 	}
 }
