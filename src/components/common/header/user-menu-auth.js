@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { Button, Offcanvas } from "react-bootstrap";
+import { Button, Nav, Offcanvas } from "react-bootstrap";
+import userMenuData from "@/helpers/data/user-menu.json";
+import Link from "next/link";
 
 export const UserMenuAuth = ({ session }) => {
 	const { name, role } = session.user;
@@ -18,9 +20,11 @@ export const UserMenuAuth = ({ session }) => {
 		);
 	};
 
+	const userMenu = userMenuData[role.toLowerCase()];
+
 	return (
 		<>
-			<Button variant="primary" onClick={handleShow}>
+			<Button variant="primary" size="sm" onClick={handleShow}>
 				{getUser()}
 			</Button>
 
@@ -29,8 +33,17 @@ export const UserMenuAuth = ({ session }) => {
 					<Offcanvas.Title>{getUser()}</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
-					Some text as placeholder. In real life you can have the
-					elements you have chosen. Like, text, images, lists, etc.
+					<Nav className="flex-column">
+						{userMenu.map((item) => (
+							<Nav.Link
+								href={item.link}
+								key={item.link}
+								as={Link}
+							>
+								{item.title}
+							</Nav.Link>
+						))}
+					</Nav>
 				</Offcanvas.Body>
 			</Offcanvas>
 		</>

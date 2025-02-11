@@ -7,7 +7,7 @@
     padding: 10px 0;
 
     .container{
-        @include flexbox();
+        @include flexbox($ai: center);
     }
 
     .slogan{
