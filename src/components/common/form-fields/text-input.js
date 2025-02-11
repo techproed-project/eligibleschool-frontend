@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 
-export const TextInput = ({ label, error, className = "mb-3", ...rest }) => {
-	const [val, setVal] = useState("");
+export const TextInput = (props) => {
+	const { label, error, initialValue, className = "mb-3", ...rest } = props;
+
+	const [val, setVal] = useState(initialValue ?? "");
 
 	return (
 		<FormGroup className={className} controlId={rest.name}>

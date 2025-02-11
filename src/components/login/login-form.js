@@ -26,11 +26,13 @@ export const LoginForm = () => {
 									label="Username"
 									name="username"
 									error={state?.errors?.username}
+									initialValue="root"
 								/>
 								<PasswordInput
 									label="Password"
 									name="password"
 									error={state?.errors?.password}
+									initialValue="12345aA."
 								/>
 								<SubmitButton title="Login" />
 							</Form>

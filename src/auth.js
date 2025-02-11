@@ -9,7 +9,7 @@ const config = {
 				// bu method dan donecek data userSession i olusturur
 				const res = await login(credentials);
 				const data = await res.json();
-				console.log(data);
+
 				if (!res.ok) {
 					return null; // login basarili degilse null dondurur
 				}
@@ -24,11 +24,31 @@ const config = {
 			},
 		}),
 	],
-    callbacks:{
-        authorized({auth, request}){
-            return true;
-        }
-    }
+	callbacks: {
+		// middleware in kapsama alanina giren sayfalara bir istek yapildiginda bu callback calisir. Kullanici sayfaya yonlendirilmeden once calisir. Buradan donen deger true ise kullanici hedef sayfaya yonlendirilir, eger false donerse kullanici hedef sayfaya giremez.
+		authorized({ auth, request }) {
+			return true;
+		},
+
+		// Uygulamada JWT token a ihtiyac duyuldugunda burasi calisir
+		async jwt({ token, user }) {
+			return { ...token, ...user };
+		},
+
+		// Uygulamada Session bilgisine ihtiyac duyuldugunda burasi calisir
+		async session({ session, token }) {
+
+			const { accessToken, user } = token;
+			
+			session.user = user;
+			session.accessToken = accessToken;
+
+			return session;
+		},
+	},
+	pages: {
+		signIn: "/login",
+	},
 };
 
 export const { handlers, signIn, signOut, auth } = NextAuth(config);
