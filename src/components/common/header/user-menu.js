@@ -8,7 +8,7 @@ export const UserMenu = async () => {
 
 	return (
 		<div>
-			{session?.user ? (
+			{session?.user?.role ? (
 				<UserMenuAuth session={session} />
 			) : (
 				<UserMenuGuest />

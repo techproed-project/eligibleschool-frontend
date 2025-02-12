@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { login } from "./services/auth-service";
 import { NextResponse } from "next/server";
+import { getIsTokenValid } from "./helpers/auth-helper";
 
 const config = {
 	providers: [
@@ -33,8 +34,9 @@ const config = {
 			const isLoggedIn = !!auth?.user;
 			const isInLoginPage = pathname.startsWith("/login");
 			const isInDashboardPages = pathname.startsWith("/dashboard");
+			const isAPITokenValid = getIsTokenValid(auth?.accessToken);
 
-			if(isLoggedIn){
+			if(isLoggedIn && isAPITokenValid){
 				if(isInLoginPage){
 					const url = searchParams.get("callbackUrl") || `${origin}/dashboard`;
 					return NextResponse.redirect(url);
@@ -61,6 +63,9 @@ const config = {
 		async session({ session, token }) {
 
 			const { accessToken, user } = token;
+			const isAPITokenValid = getIsTokenValid(accessToken);
+			if(!isAPITokenValid) return null;
+
 			
 			session.user = user;
 			session.accessToken = accessToken;

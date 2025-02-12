@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button, Nav, Offcanvas } from "react-bootstrap";
 import userMenuData from "@/helpers/data/user-menu.json";
 import Link from "next/link";
+import { ButtonLogout } from "./button-logout";
 
 export const UserMenuAuth = ({ session }) => {
 	const { name, role } = session.user;
@@ -43,6 +44,7 @@ export const UserMenuAuth = ({ session }) => {
 								{item.title}
 							</Nav.Link>
 						))}
+						<ButtonLogout className="mt-4" />
 					</Nav>
 				</Offcanvas.Body>
 			</Offcanvas>
