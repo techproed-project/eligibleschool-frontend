@@ -5,12 +5,18 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { useRouter } from "next/navigation";
 import { DataListHeader } from "../common/data-list-header";
+import DataListToolbar from "../common/data-list-toolbar";
+import { deleteAdminAction } from "@/actions/admin-action";
 
 export const AdminList = ({ data }) => {
 	const { content, totalElements, pageable, size } = data;
 	const { offset } = pageable;
 
 	const router = useRouter();
+
+	const toolbar = (row) => (
+		<DataListToolbar deleteAction={deleteAdminAction} id={row.id} />
+	);
 
 	const header = (
 		<DataListHeader title="Admins" targetUrl="/dashboard/admin/new" />
@@ -37,10 +43,12 @@ export const AdminList = ({ data }) => {
 				<Column
 					header="#"
 					body={(row, options) => options.rowIndex + 1}
+					headerStyle={{ width: "20px" }}
 				/>
 				<Column field="name" header="First Name"></Column>
 				<Column field="surname" header="Last Name"></Column>
 				<Column field="username" header="User Name"></Column>
+				<Column header="" body={toolbar} />
 			</DataTable>
 		</Container>
 	);
