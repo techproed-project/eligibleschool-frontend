@@ -17,7 +17,7 @@ export const SubmitButton = ({
 			className={className}
 			size="lg"
 			disabled={pending}
-			variant="secondary"
+			variant="primary"
 			{...rest}
 		>
 			{pending ? (

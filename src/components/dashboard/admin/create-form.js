@@ -7,15 +7,28 @@ import {
 	DateInput,
 	MaskedInput,
 	PasswordInput,
-    SubmitButton,
+	SubmitButton,
 } from "@/components/common/form-fields";
+import { BackButton } from "@/components/common/form-fields/back-button";
 import { appConfig } from "@/helpers/config";
 import { initialState } from "@/helpers/form-validation";
+import { swAlert } from "@/helpers/swal";
+import { useRouter } from "next/navigation";
 import React, { useActionState } from "react";
-import { Form } from "react-bootstrap";
+import { ButtonGroup, Form } from "react-bootstrap";
 
 export const AdminCreateForm = () => {
 	const [state, formAction] = useActionState(createAdminAction, initialState);
+	const router = useRouter();
+
+    console.log(state)
+
+	if (state?.message) {
+		swAlert(state.message, state.ok ? "success" : "error");
+		if (state.ok) {
+			router.push("/dashboard/admin");
+		}
+	}
 
 	return (
 		<FormContainer>
@@ -44,7 +57,7 @@ export const AdminCreateForm = () => {
 					label="Date of birth"
 					name="birthDay"
 					error={state?.errors?.birthDay}
-					type="date"
+					dateFormat="yy-mm-dd"
 				/>
 
 				<TextInput
@@ -58,6 +71,13 @@ export const AdminCreateForm = () => {
 					name="phoneNumber"
 					error={state?.errors?.phoneNumber}
 					mask="999-999-9999"
+				/>
+
+				<MaskedInput
+					label="SSN"
+					name="ssn"
+					error={state?.errors?.ssn}
+					mask="999-99-9999"
 				/>
 
 				<TextInput
@@ -78,7 +98,10 @@ export const AdminCreateForm = () => {
 					error={state?.errors?.confirmPassword}
 				/>
 
-                <SubmitButton title="Create" />
+				<ButtonGroup className="w-100">
+					<BackButton />
+					<SubmitButton title="Create" />
+				</ButtonGroup>
 			</Form>
 		</FormContainer>
 	);

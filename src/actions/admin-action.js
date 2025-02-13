@@ -13,18 +13,23 @@ export const createAdminAction = async (prevState, formData) => {
 	try {
 		const fields = convertFormDataToJSON(formData);
 
+		console.log(fields);
+
 		AdminSchema.validateSync(fields, { abortEarly: false });
 
 		const res = await createAdmin(fields);
 		const data = await res.json();
 
+		console.log(data);
+
 		if (!res.ok) {
-			return response(false, "", data?.message);
+			return response(false, data?.message);
 		}
 
 		// REVALIDATION YAPILACAK
 		return response(true, data?.message);
 	} catch (err) {
+		console.log(err);
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner);
 		}
