@@ -26,6 +26,7 @@ export const SelectInput = (props) => {
 				onChange={(e) => setVal(e.target.value)}
 				{...rest}
 			>
+                <option value="" disabled>Select</option>
 				{options.map((item) => (
 					<option value={item[optionValue]} key={item[optionValue]}>
 						{item[optionLabel]}
