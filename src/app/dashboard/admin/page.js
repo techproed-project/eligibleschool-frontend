@@ -4,6 +4,8 @@ import { AdminList } from "@/components/dashboard/admin/list";
 import { getAllAdminsByPage } from "@/services/admin-service";
 import React from "react";
 
+export const fetchCache = 'default-cache';
+
 const Page = async ({ searchParams }) => {
 
 	const { page } = await searchParams;

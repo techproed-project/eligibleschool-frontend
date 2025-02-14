@@ -8,29 +8,22 @@ import {
 } from "@/helpers/form-validation";
 import { AdminSchema } from "@/helpers/schemes/admin-schema";
 import { createAdmin, deleteAdmin } from "@/services/admin-service";
+import { revalidatePath } from "next/cache";
 
 export const createAdminAction = async (prevState, formData) => {
 	const fields = convertFormDataToJSON(formData);
-	
 
 	try {
-		
-
-		console.log(fields);
-
 		AdminSchema.validateSync(fields, { abortEarly: false });
 
 		const res = await createAdmin(fields);
 		const data = await res.json();
 
-		console.log(data);
-
-
 		if (!res.ok) {
 			return response(false, fields, data?.message, data?.validations);
 		}
 
-		// REVALIDATION YAPILACAK
+		revalidatePath("/dashboard/admin");
 		return response(true, fields, data?.message);
 	} catch (err) {
 		console.log(err);
@@ -51,6 +44,8 @@ export const deleteAdminAction = async (id) => {
 	if (!res.ok) {
 		return response(false, data);
 	}
+
+	revalidatePath("/dashboard/admin");
 
 	return response(true, data);
 };
