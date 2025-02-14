@@ -1,11 +1,24 @@
 "use client";
 import { Calendar } from "primereact/calendar";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import "./date-input.scss";
 
 export const DateInput = (props) => {
-	const { label, error, className = "date-input mb-3", ...rest } = props;
+	const {
+		label,
+		error,
+		defaultValue,
+		className = "date-input mb-3",
+		...rest
+	} = props;
+	const [val, setVal] = useState("");
+
+	useEffect(() => {
+		if (defaultValue) {
+			setVal(new Date(defaultValue));
+		}
+	}, [defaultValue]);
 
 	return (
 		<FormGroup className={className} controlId={rest.name}>
@@ -15,6 +28,7 @@ export const DateInput = (props) => {
 				isInvalid={!!error}
 				size="lg"
 				as={Calendar}
+				value={val}
 				{...rest}
 			/>
 

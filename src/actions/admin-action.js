@@ -10,8 +10,11 @@ import { AdminSchema } from "@/helpers/schemes/admin-schema";
 import { createAdmin, deleteAdmin } from "@/services/admin-service";
 
 export const createAdminAction = async (prevState, formData) => {
+	const fields = convertFormDataToJSON(formData);
+	
+
 	try {
-		const fields = convertFormDataToJSON(formData);
+		
 
 		console.log(fields);
 
@@ -21,6 +24,7 @@ export const createAdminAction = async (prevState, formData) => {
 		const data = await res.json();
 
 		console.log(data);
+
 
 		if (!res.ok) {
 			return response(false, fields, data?.message, data?.validations);
