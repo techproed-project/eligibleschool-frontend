@@ -15,7 +15,11 @@ export const ManagerList = ({ data }) => {
 	const router = useRouter();
 
 	const toolbar = (row) => (
-		<DataListToolbar deleteAction={deleteManagerAction} id={row.userId} />
+		<DataListToolbar
+			deleteAction={deleteManagerAction}
+			id={row.userId}
+			editUrl={`/dashboard/manager/${row.userId}`}
+		/>
 	);
 
 	const header = (

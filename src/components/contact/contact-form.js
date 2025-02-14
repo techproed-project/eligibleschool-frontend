@@ -1,31 +1,26 @@
 "use client";
-import React, { useActionState, useEffect, useState } from "react";
+import React, { useActionState, useEffect, useRef, useState } from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import "./contact-form.scss";
 import { createContactAction } from "@/actions/contact-actions";
 import { initialState } from "@/helpers/form-validation";
-import { contact } from "@/helpers/entities/contact";
 import { swAlert } from "@/helpers/swal";
 
 export const ContactForm = () => {
-	const [formState, setFormState] = useState(contact);
 
 	const [state, formAction] = useActionState(
 		createContactAction,
 		initialState
 	);
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
+	const refForm = useRef(null);
 
-		setFormState((prevState) => ({ ...prevState, [name]: value }));
-	};
-
+	
 	useEffect(() => {
 		if (state.message) {
 			if (state.ok) {
 				swAlert(state.message, "success");
-				setFormState(contact);
+				refForm.current.reset();
 			} else {
 				swAlert(state.message, "error");
 			}
@@ -34,7 +29,7 @@ export const ContactForm = () => {
 
 	return (
 		<div className="contact-form">
-			<Form action={formAction}>
+			<Form action={formAction} ref={refForm}>
 				<Row className="g-3">
 					<Col md={6}>
 						<InputGroup className="mb-3">
@@ -47,8 +42,7 @@ export const ContactForm = () => {
 								aria-label="Your name"
 								aria-describedby="name"
 								isInvalid={!!state?.errors?.name}
-								value={formState?.name}
-								onChange={handleChange}
+								defaultValue={state?.data?.name ?? ""}
 							/>
 							<Form.Control.Feedback type="invalid">
 								{state?.errors?.name}
@@ -66,8 +60,7 @@ export const ContactForm = () => {
 								aria-label="Your email"
 								aria-describedby="email"
 								isInvalid={!!state?.errors?.email}
-								value={formState?.email}
-								onChange={handleChange}
+								defaultValue={state?.data?.email ?? ""}
 							/>
 							<Form.Control.Feedback type="invalid">
 								{state?.errors?.email}
@@ -85,8 +78,7 @@ export const ContactForm = () => {
 								aria-label="Your subject"
 								aria-describedby="subject"
 								isInvalid={!!state?.errors?.subject}
-								value={formState?.subject}
-								onChange={handleChange}
+								defaultValue={state?.data?.subject ?? ""}
 							/>
 							<Form.Control.Feedback type="invalid">
 								{state?.errors?.subject}
@@ -105,8 +97,7 @@ export const ContactForm = () => {
 								aria-describedby="message"
 								as="textarea"
 								isInvalid={!!state?.errors?.message}
-								value={formState?.message}
-								onChange={handleChange}
+								defaultValue={state?.data?.message ?? ""}
 							/>
 							<Form.Control.Feedback type="invalid">
 								{state?.errors?.message}

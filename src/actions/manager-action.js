@@ -24,9 +24,8 @@ export const createManagerAction = async (prevState, formData) => {
 		}
 
 		revalidatePath("/dashboard/manager");
-		return response(true, fields, data?.message);
+		return response(true, fields, "Manager was created");
 	} catch (err) {
-		console.log(err);
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner, fields);
 		}
@@ -41,6 +40,8 @@ export const updateManagerAction = async (prevState, formData) => {
 	try {
 		ManagerSchema.validateSync(fields, { abortEarly: false });
 
+		console.log(fields)
+
 		const res = await updateManager(fields);
 		const data = await res.json();
 
@@ -49,9 +50,8 @@ export const updateManagerAction = async (prevState, formData) => {
 		}
 
 		revalidatePath("/dashboard/manager");
-		return response(true, fields, data?.message);
+		return response(true, fields, "Manager was updated");
 	} catch (err) {
-		console.log(err);
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner, fields);
 		}
@@ -72,5 +72,5 @@ export const deleteManagerAction = async (id) => {
 
 	revalidatePath("/dashboard/manager");
 
-	return response(true, {}, data);
+	return response(true, {}, "Manager was deleted");
 };

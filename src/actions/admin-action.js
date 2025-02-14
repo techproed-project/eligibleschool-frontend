@@ -26,7 +26,6 @@ export const createAdminAction = async (prevState, formData) => {
 		revalidatePath("/dashboard/admin");
 		return response(true, fields, data?.message);
 	} catch (err) {
-		console.log(err);
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner, fields);
 		}

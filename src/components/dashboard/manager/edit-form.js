@@ -1,5 +1,5 @@
 "use client";
-import { createAdminAction } from "@/actions/admin-action";
+import { updateManagerAction } from "@/actions/manager-action";
 import {
 	FormContainer,
 	TextInput,
@@ -11,24 +11,23 @@ import {
 } from "@/components/common/form-fields";
 import { BackButton } from "@/components/common/form-fields/back-button";
 import { appConfig } from "@/helpers/config";
-import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-export const AdminCreateForm = () => {
-	const [state, formAction, isLoading] = useActionState(
-		createAdminAction,
-		initialState
-	);
+export const ManagerEditForm = ({ user }) => {
+	const [state, formAction, isLoading] = useActionState(updateManagerAction, {
+		data: user,
+	});
+
 	const router = useRouter();
 
 	useEffect(() => {
 		if (state?.message) {
 			swAlert(state.message, state.ok ? "success" : "error");
 			if (state.ok) {
-				router.push("/dashboard/admin");
+				router.push("/dashboard/manager");
 			}
 		}
 	}, [state]);
@@ -36,6 +35,7 @@ export const AdminCreateForm = () => {
 	return (
 		<FormContainer>
 			<Form action={formAction}>
+				<input type="hidden" name="id" value={user.userId} />
 				<TextInput
 					label="First Name"
 					name="name"
@@ -66,7 +66,7 @@ export const AdminCreateForm = () => {
 					error={state?.errors?.birthDay}
 					dateFormat="yy-mm-dd"
 					defaultValue={state?.data?.birthDay ?? ""}
-                    key={`birthDay-${isLoading}`}
+					key={`birthDay-${isLoading}`}
 				/>
 
 				<TextInput
@@ -115,7 +115,7 @@ export const AdminCreateForm = () => {
 
 				<ButtonGroup className="w-100">
 					<BackButton />
-					<SubmitButton title="Create" />
+					<SubmitButton title="Update" />
 				</ButtonGroup>
 			</Form>
 		</FormContainer>

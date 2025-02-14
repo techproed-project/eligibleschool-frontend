@@ -11,8 +11,10 @@ import { AuthSchema } from "@/helpers/schemes/auth-schema";
 import { AuthError } from "next-auth";
 
 export const loginAction = async (prevState, formData) => {
+	const fields = convertFormDataToJSON(formData);
+	
 	try {
-		const fields = convertFormDataToJSON(formData);
+		
 
 		AuthSchema.validateSync(fields, { abortEarly: false });
 
@@ -22,9 +24,9 @@ export const loginAction = async (prevState, formData) => {
 		// login basarili degise bu satirda hata firlatilir.
 	} catch (err) {
 		if (err instanceof YupValidationError) {
-			return transformYupErrors(err.inner);
+			return transformYupErrors(err.inner, fields);
 		} else if (err instanceof AuthError) {
-			return response(false, "Invalid credentials");
+			return response(false, fields, "Invalid credentials");
 		}
 
 		throw err;

@@ -1,5 +1,5 @@
 "use client";
-import { createAdminAction } from "@/actions/admin-action";
+import { createManagerAction } from "@/actions/manager-action";
 import {
 	FormContainer,
 	TextInput,
@@ -17,20 +17,18 @@ import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-export const AdminCreateForm = () => {
+export const ManagerCreateForm = () => {
 	const [state, formAction, isLoading] = useActionState(
-		createAdminAction,
+		createManagerAction,
 		initialState
 	);
 	const router = useRouter();
-
-	console.log(state);
 
 	useEffect(() => {
 		if (state?.message) {
 			swAlert(state.message, state.ok ? "success" : "error");
 			if (state.ok) {
-				router.push("/dashboard/admin");
+				router.push("/dashboard/manager");
 			}
 		}
 	}, [state]);

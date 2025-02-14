@@ -12,8 +12,6 @@ const DataListToolbar = (props) => {
 
 		const res = await deleteAction(id);
 
-		console.log(res)
-
 		swAlert(res.message, res.ok ? "success" : "error");
 	};
 
