@@ -23,15 +23,15 @@ export const createAdminAction = async (prevState, formData) => {
 		console.log(data);
 
 		if (!res.ok) {
-			return response(false, data?.message);
+			return response(false, fields, data?.message, data?.validations);
 		}
 
 		// REVALIDATION YAPILACAK
-		return response(true, data?.message);
+		return response(true, fields, data?.message);
 	} catch (err) {
 		console.log(err);
 		if (err instanceof YupValidationError) {
-			return transformYupErrors(err.inner);
+			return transformYupErrors(err.inner, fields);
 		}
 
 		throw err;

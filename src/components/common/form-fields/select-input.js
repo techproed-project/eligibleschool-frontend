@@ -1,12 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { FormControl, FormGroup, FormLabel, FormSelect } from "react-bootstrap";
 
 export const SelectInput = (props) => {
 	const {
 		label,
 		error,
-		initialValue,
 		options,
 		optionLabel,
 		optionValue,
@@ -14,7 +13,6 @@ export const SelectInput = (props) => {
 		...rest
 	} = props;
 
-	const [val, setVal] = useState(initialValue ?? "");
 
 	return (
 		<FormGroup className={className} controlId={rest.name}>
@@ -22,8 +20,6 @@ export const SelectInput = (props) => {
 			<FormSelect
 				isInvalid={!!error}
 				size="lg"
-				value={val}
-				onChange={(e) => setVal(e.target.value)}
 				{...rest}
 			>
                 <option value="" disabled>Select</option>

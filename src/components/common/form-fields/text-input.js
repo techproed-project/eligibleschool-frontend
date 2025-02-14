@@ -1,22 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 
 export const TextInput = (props) => {
-	const { label, error, initialValue, className = "mb-3", ...rest } = props;
-
-	const [val, setVal] = useState(initialValue ?? "");
+	const { label, error, className = "mb-3", ...rest } = props;
 
 	return (
 		<FormGroup className={className} controlId={rest.name}>
 			<FormLabel>{label}</FormLabel>
-			<FormControl
-				isInvalid={!!error}
-				size="lg"
-				value={val}
-				onChange={(e) => setVal(e.target.value)}
-				{...rest}
-			/>
+			<FormControl isInvalid={!!error} size="lg" {...rest} />
 			<FormControl.Feedback type="invalid">{error}</FormControl.Feedback>
 		</FormGroup>
 	);
