@@ -47,5 +47,5 @@ export const deleteAdminAction = async (id) => {
 
 	revalidatePath("/dashboard/admin");
 
-	return response(true, data);
+	return response(true, {}, data);
 };
