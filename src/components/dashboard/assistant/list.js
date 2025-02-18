@@ -6,21 +6,28 @@ import { Column } from "primereact/column";
 import { useRouter } from "next/navigation";
 import { DataListHeader } from "../common/data-list-header";
 import DataListToolbar from "../common/data-list-toolbar";
-import { deleteAdminAction } from "@/actions/admin-action";
+import { deleteAssistantAction } from "@/actions/assistant-action";
 
-export const AdminList = ({ data }) => {
+export const AssistantList = ({ data }) => {
 	const { content, totalElements, pageable, size } = data;
 	const { offset } = pageable;
 
 	const router = useRouter();
-	const pagePath = "/dashboard/admin";
+	const pagePath = "/dashboard/assistant-manager";
 
 	const toolbar = (row) => (
-		<DataListToolbar deleteAction={deleteAdminAction} id={row.id} />
+		<DataListToolbar
+			deleteAction={deleteAssistantAction}
+			id={row.userId}
+			editUrl={`${pagePath}/${row.userId}`}
+		/>
 	);
 
 	const header = (
-		<DataListHeader title="Admins" targetUrl={`${pagePath}/new`} />
+		<DataListHeader
+			title="Assistants"
+			targetUrl={`${pagePath}/new`}	
+		/>
 	);
 	const onPage = (e) => {
 		router.push(`${pagePath}?page=${e.page}`);
@@ -29,7 +36,7 @@ export const AdminList = ({ data }) => {
 	return (
 		<Container>
 			<DataTable
-				dataKey="id"
+				dataKey="userId"
 				lazy
 				value={content}
 				showGridlines
