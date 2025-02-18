@@ -1,14 +1,14 @@
 import { PageHeader } from "@/components/common/page-header";
 import { Spacer } from "@/components/common/spacer";
-import { TermCreateForm } from "@/components/dashboard/term/create-form";
+import { LessonCreateForm } from "@/components/dashboard/lesson/create-form";
 import React from "react";
 
 const Page = () => {
 	return (
 		<>
-			<PageHeader title="New Term" />
+			<PageHeader title="New Lesson" />
 			<Spacer />
-			<TermCreateForm />
+			<LessonCreateForm/>
 			<Spacer />
 		</>
 	);
