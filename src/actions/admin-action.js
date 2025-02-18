@@ -41,7 +41,7 @@ export const deleteAdminAction = async (id) => {
 	const data = await res.text();
 
 	if (!res.ok) {
-		return response(false, data);
+		return response(false, {}, "User could not be deleted");
 	}
 
 	revalidatePath("/dashboard/admin");

@@ -7,7 +7,11 @@ import {
 	YupValidationError,
 } from "@/helpers/form-validation";
 import { ManagerSchema } from "@/helpers/schemes/manager-schema";
-import { createManager, deleteManager, updateManager } from "@/services/manager-service";
+import {
+	createManager,
+	deleteManager,
+	updateManager,
+} from "@/services/manager-service";
 import { revalidatePath } from "next/cache";
 
 export const createManagerAction = async (prevState, formData) => {
@@ -40,7 +44,7 @@ export const updateManagerAction = async (prevState, formData) => {
 	try {
 		ManagerSchema.validateSync(fields, { abortEarly: false });
 
-		console.log(fields)
+		console.log(fields);
 
 		const res = await updateManager(fields);
 		const data = await res.json();
@@ -67,7 +71,7 @@ export const deleteManagerAction = async (id) => {
 	const data = await res.json();
 
 	if (!res.ok) {
-		return response(false, data.message);
+		return response(false, {}, "User could not be deleted");
 	}
 
 	revalidatePath("/dashboard/manager");

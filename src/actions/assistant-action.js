@@ -65,7 +65,7 @@ export const deleteAssistantAction = async (id) => {
 	const data = await res.json();
 
 	if (!res.ok) {
-		return response(false, data.message);
+		return response(false,  {}, "User could not be deleted");
 	}
 
 	revalidatePath("/dashboard/assistant-manager");
