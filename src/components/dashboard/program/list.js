@@ -1,0 +1,69 @@
+"use client";
+import React from "react";
+import { Container } from "react-bootstrap";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { useRouter } from "next/navigation";
+import { DataListHeader } from "../common/data-list-header";
+import DataListToolbar from "../common/data-list-toolbar";
+import { deleteProgramAction } from "@/actions/program-action";
+
+export const ProgramList = ({ data }) => {
+	const { content, totalElements, pageable, size } = data;
+	const { offset } = pageable;
+
+	const router = useRouter();
+	const pagePath = "/dashboard/program";
+
+	const toolbar = (row) => (
+		<DataListToolbar deleteAction={deleteProgramAction} id={row.lessonProgramId} />
+	);
+
+	const header = (
+		<DataListHeader title="Programs" targetUrl={`${pagePath}/new`} />
+	);
+	const onPage = (e) => {
+		router.push(`${pagePath}?page=${e.page}`);
+	};
+
+	return (
+		<Container>
+			<DataTable
+				dataKey="lessonProgramId"
+				lazy
+				value={content}
+				showGridlines
+				stripedRows
+				paginator
+				rows={size}
+				totalRecords={totalElements}
+				first={offset}
+				onPage={onPage}
+				header={header}
+			>
+				<Column
+					header="#"
+					body={(row, options) => options.rowIndex + 1}
+					headerStyle={{ width: "20px" }}
+					bodyClassName="index"
+				/>
+				<Column
+					field="name"
+					header="First Name"
+					bodyClassName="First Name"
+				></Column>
+				<Column
+					field="surname"
+					header="Last Name"
+					bodyClassName="Last Name"
+				></Column>
+				<Column
+					field="username"
+					header="User Name"
+					bodyClassName="User Name"
+				></Column>
+				<Column header="" body={toolbar} />
+			</DataTable>
+		</Container>
+	);
+};
