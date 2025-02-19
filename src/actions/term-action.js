@@ -40,8 +40,6 @@ export const deleteTermAction = async (id) => {
 	const res = await deleteTerm(id);
 	const data = await res.json();
 
-	console.log(data);
-
 	if (!res.ok) {
 		return response(false, {}, "Term could not be deleted");
 	}

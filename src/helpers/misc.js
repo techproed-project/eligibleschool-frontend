@@ -8,6 +8,10 @@ export const getTermValues = () =>
 
 export const getDayValues = () => appConfig.days.map((item) => item.value);
 
+export const getDayLabel = (value) => {
+	const day = appConfig.days.find((item) => item.value === value);
+	return day?.label;
+};
 export const getTermLabel = (value) => {
 	const term = appConfig.educationTerms.find((item) => item.value === value);
 	return term?.label;

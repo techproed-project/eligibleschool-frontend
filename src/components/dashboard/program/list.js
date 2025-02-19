@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { DataListHeader } from "../common/data-list-header";
 import DataListToolbar from "../common/data-list-toolbar";
 import { deleteProgramAction } from "@/actions/program-action";
+import { getDayLabel } from "@/helpers/misc";
+import { formatTimeLT } from "@/helpers/date-time";
 
 export const ProgramList = ({ data }) => {
 	const { content, totalElements, pageable, size } = data;
@@ -16,7 +18,10 @@ export const ProgramList = ({ data }) => {
 	const pagePath = "/dashboard/program";
 
 	const toolbar = (row) => (
-		<DataListToolbar deleteAction={deleteProgramAction} id={row.lessonProgramId} />
+		<DataListToolbar
+			deleteAction={deleteProgramAction}
+			id={row.lessonProgramId}
+		/>
 	);
 
 	const header = (
@@ -24,6 +29,14 @@ export const ProgramList = ({ data }) => {
 	);
 	const onPage = (e) => {
 		router.push(`${pagePath}?page=${e.page}`);
+	};
+
+	const formatLessons = (row) => {
+		return row.lessonName.map((item) => item.lessonName).join(", ");
+	};
+
+	const formatDay = (row) => {
+		return getDayLabel(row.day);
 	};
 
 	return (
@@ -48,19 +61,24 @@ export const ProgramList = ({ data }) => {
 					bodyClassName="index"
 				/>
 				<Column
-					field="name"
-					header="First Name"
-					bodyClassName="First Name"
+					body={formatLessons}
+					header="Lessons"
+					bodyClassName="Lessons"
 				></Column>
 				<Column
-					field="surname"
-					header="Last Name"
-					bodyClassName="Last Name"
+					body={formatDay}
+					header="Day"
+					bodyClassName="Day"
 				></Column>
 				<Column
-					field="username"
-					header="User Name"
-					bodyClassName="User Name"
+					body={(row) => formatTimeLT(row.startTime)}
+					header="Start Time"
+					bodyClassName="Start Time"
+				></Column>
+				<Column
+					body={(row) => formatTimeLT(row.stopTime)}
+					header="End Time"
+					bodyClassName="End Time"
 				></Column>
 				<Column header="" body={toolbar} />
 			</DataTable>

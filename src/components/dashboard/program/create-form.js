@@ -1,12 +1,9 @@
 "use client";
-import { createAdminAction } from "@/actions/admin-action";
+import { createProgramAction } from "@/actions/program-action";
 import {
-	FormContainer,
-	TextInput,
-	SelectInput,
 	DateInput,
-	MaskedInput,
-	PasswordInput,
+	FormContainer,
+	SelectInput,
 	SubmitButton,
 } from "@/components/common/form-fields";
 import { BackButton } from "@/components/common/form-fields/back-button";
@@ -17,9 +14,9 @@ import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-export const AdminCreateForm = () => {
+export const ProgramCreateForm = ({ terms }) => {
 	const [state, formAction, isLoading] = useActionState(
-		createAdminAction,
+		createProgramAction,
 		initialState
 	);
 	const router = useRouter();
@@ -28,7 +25,7 @@ export const AdminCreateForm = () => {
 		if (state?.message) {
 			swAlert(state.message, state.ok ? "success" : "error");
 			if (state.ok) {
-				router.push("/dashboard/admin");
+				router.push("/dashboard/program");
 			}
 		}
 	}, [state]);
@@ -36,81 +33,31 @@ export const AdminCreateForm = () => {
 	return (
 		<FormContainer>
 			<Form action={formAction}>
-				<TextInput
-					label="First Name"
-					name="name"
-					error={state?.errors?.name}
-					defaultValue={state?.data?.name ?? ""}
-				/>
-				<TextInput
-					label="Last Name"
-					name="surname"
-					error={state?.errors?.surname}
-					defaultValue={state?.data?.surname ?? ""}
-				/>
-
 				<SelectInput
-					name="gender"
-					label="Gender"
-					error={state?.errors?.gender}
-					options={appConfig.genders}
+					name="educationTermId"
+					label="Education Term"
+					error={state?.errors?.educationTermId}
+					options={terms}
 					optionLabel="label"
 					optionValue="value"
-					defaultValue={state?.data?.gender ?? ""}
-					key={`gender-${isLoading}`}
+					defaultValue={state?.data?.educationTermId ?? ""}
+					key={`educationTermId-${isLoading}`}
 				/>
 
 				<DateInput
-					label="Date of birth"
-					name="birthDay"
-					error={state?.errors?.birthDay}
-					dateFormat="yy-mm-dd"
-					defaultValue={state?.data?.birthDay ?? ""}
-                    key={`birthDay-${isLoading}`}
+					label="Start time"
+					name="startTime"
+					error={state?.errors?.startTime}
+					timeOnly
+					defaultValue={state?.data?.startTime ?? ""}
 				/>
 
-				<TextInput
-					label="Place of birth"
-					name="birthPlace"
-					error={state?.errors?.birthPlace}
-					defaultValue={state?.data?.birthPlace ?? ""}
-				/>
-
-				<MaskedInput
-					label="Phone number"
-					name="phoneNumber"
-					error={state?.errors?.phoneNumber}
-					mask="999-999-9999"
-					value={state?.data?.phoneNumber ?? ""}
-				/>
-
-				<MaskedInput
-					label="SSN"
-					name="ssn"
-					error={state?.errors?.ssn}
-					mask="999-99-9999"
-					value={state?.data?.ssn ?? ""}
-				/>
-
-				<TextInput
-					label="Username"
-					name="username"
-					error={state?.errors?.username}
-					defaultValue={state?.data?.username ?? ""}
-				/>
-
-				<PasswordInput
-					label="Password"
-					name="password"
-					error={state?.errors?.password}
-					defaultValue={state?.data?.password ?? ""}
-				/>
-
-				<PasswordInput
-					label="Confirm password"
-					name="confirmPassword"
-					error={state?.errors?.confirmPassword}
-					defaultValue={state?.data?.confirmPassword ?? ""}
+				<DateInput
+					label="End time"
+					name="stopTime"
+					error={state?.errors?.stopTime}
+					timeOnly
+					defaultValue={state?.data?.stopTime ?? ""}
 				/>
 
 				<ButtonGroup className="w-100">

@@ -9,7 +9,6 @@ import { initialState } from "@/helpers/form-validation";
 export const LoginForm = () => {
 	const [state, formAction] = useActionState(loginAction, initialState);
 
-	console.log(state);
 	return (
 		<Container className="login-form">
 			<Row className="justify-content-center">

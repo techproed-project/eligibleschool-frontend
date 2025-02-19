@@ -12,7 +12,7 @@ import { revalidatePath } from "next/cache";
 
 export const createLessonAction = async (prevState, formData) => {
 	const fields = convertFormDataToJSON(formData);
-console.log(fields)
+
 	try {
 		LessonSchema.validateSync(fields, { abortEarly: false });
 

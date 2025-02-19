@@ -44,8 +44,6 @@ export const updateManagerAction = async (prevState, formData) => {
 	try {
 		ManagerSchema.validateSync(fields, { abortEarly: false });
 
-		console.log(fields);
-
 		const res = await updateManager(fields);
 		const data = await res.json();
 
