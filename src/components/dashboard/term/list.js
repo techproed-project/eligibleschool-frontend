@@ -55,19 +55,27 @@ export const TermList = ({ data }) => {
 					header="#"
 					body={(row, options) => options.rowIndex + 1}
 					headerStyle={{ width: "20px" }}
+					bodyClassName="index"
 				/>
-				<Column body={formatTerm} header="Term"></Column>
+				<Column
+					body={formatTerm}
+					header="Term"
+					bodyClassName="Term"
+				></Column>
 				<Column
 					body={(row) => formatDate(row.startDate)}
 					header="Start Date"
+					bodyClassName="Start Date"
 				></Column>
 				<Column
 					body={(row) => formatDate(row.endDate)}
 					header="End Date"
+					bodyClassName="End Date"
 				></Column>
 				<Column
 					body={(row) => formatDate(row.lastRegistrationDate)}
 					header="Last Registration Date"
+					bodyClassName="Last Registration Date"
 				></Column>
 				<Column header="" body={toolbar} />
 			</DataTable>

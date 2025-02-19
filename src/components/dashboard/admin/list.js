@@ -45,10 +45,23 @@ export const AdminList = ({ data }) => {
 					header="#"
 					body={(row, options) => options.rowIndex + 1}
 					headerStyle={{ width: "20px" }}
+					bodyClassName="index"
 				/>
-				<Column field="name" header="First Name"></Column>
-				<Column field="surname" header="Last Name"></Column>
-				<Column field="username" header="User Name"></Column>
+				<Column
+					field="name"
+					header="First Name"
+					bodyClassName="First Name"
+				></Column>
+				<Column
+					field="surname"
+					header="Last Name"
+					bodyClassName="Last Name"
+				></Column>
+				<Column
+					field="username"
+					header="User Name"
+					bodyClassName="User Name"
+				></Column>
 				<Column header="" body={toolbar} />
 			</DataTable>
 		</Container>

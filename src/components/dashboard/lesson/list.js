@@ -53,10 +53,23 @@ export const LessonList = ({ data }) => {
 					header="#"
 					body={(row, options) => options.rowIndex + 1}
 					headerStyle={{ width: "20px" }}
+					bodyClassName="index"
 				/>
-				<Column field="lessonName" header="Name"></Column>
-				<Column field="creditScore" header="Credit"></Column>
-				<Column body={formatCompulsory} header="Compulsory"></Column>
+				<Column
+					field="lessonName"
+					header="Name"
+					bodyClassName="Name"
+				></Column>
+				<Column
+					field="creditScore"
+					header="Credit"
+					bodyClassName="Credit"
+				></Column>
+				<Column
+					body={formatCompulsory}
+					header="Compulsory"
+					bodyClassName="Compulsory"
+				></Column>
 
 				<Column header="" body={toolbar} />
 			</DataTable>

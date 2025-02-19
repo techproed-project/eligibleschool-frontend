@@ -51,7 +51,7 @@ export const LessonCreateForm = () => {
 					label="Compulsory"
 					name="compulsory"
 					type="checkbox"
-					defaultValue={state?.data?.compulsory ?? ""}
+					defaultValue={state?.data?.compulsory ?? "true"}
 				/>
 
 				<ButtonGroup className="w-100">
