@@ -13,6 +13,7 @@ import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
+import { appConfig } from "@/helpers/config";
 
 export const ProgramCreateForm = ({ terms, lessons }) => {
 	const [state, formAction, isLoading] = useActionState(
@@ -21,8 +22,7 @@ export const ProgramCreateForm = ({ terms, lessons }) => {
 	);
 	const router = useRouter();
 
-
-	console.log(lessons)
+	console.log(state);
 
 	useEffect(() => {
 		if (state?.message) {
@@ -37,12 +37,24 @@ export const ProgramCreateForm = ({ terms, lessons }) => {
 		<FormContainer>
 			<Form action={formAction}>
 				<MultipleSelectInput
-					name="lessonIdList"
+					id="lessonIdList"
+					name="abc"
 					label="Lessons"
 					error={state?.errors?.lessonIdList}
 					options={lessons}
 					optionLabel="lessonName"
 					optionValue="lessonId"
+				/>
+
+				<SelectInput
+					name="day"
+					label="Day"
+					error={state?.errors?.day}
+					options={appConfig.days}
+					optionLabel="label"
+					optionValue="value"
+					defaultValue={state?.data?.day ?? ""}
+					key={`day-${isLoading}`}
 				/>
 
 				<SelectInput

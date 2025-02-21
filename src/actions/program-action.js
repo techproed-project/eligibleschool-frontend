@@ -13,19 +13,25 @@ import { revalidatePath } from "next/cache";
 export const createProgramAction = async (prevState, formData) => {
 	const fields = convertFormDataToJSON(formData);
 
-	console.log(fields);
-
+	
 	try {
 		ProgramSchema.validateSync(fields, { abortEarly: false });
 
-		const res = await createProgram(fields);
+		const payload = {
+			...fields,
+			lessonIdList: JSON.parse(fields.lessonIdList),
+		}
+
+
+		const res = await createProgram(payload);
 		const data = await res.json();
 
 		if (!res.ok) {
 			return response(false, fields, data?.message, data?.validations);
 		}
 
-		revalidatePath("/dashboard/programm");
+		revalidatePath("/dashboard/program");
+		
 		return response(true, fields, "Program was created");
 	} catch (err) {
 		if (err instanceof YupValidationError) {

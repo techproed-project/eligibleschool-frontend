@@ -21,3 +21,9 @@ export const isLater = (timeBefore, timeAfter) => {
 export const isTimeValid = (time) => {
 	return moment(time, "HH:mm").isValid();
 };
+
+
+export const convertTimeToDateTime = (time) => {
+	const dateTimeStr = `2000-01-01 ${time}`;
+	return moment(dateTimeStr, "YYYY-MM-DD HH:mm:ss");
+}

@@ -3,7 +3,7 @@ import { Calendar } from "primereact/calendar";
 import React, { useEffect, useState } from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import "./date-input.scss";
-import { isTimeValid } from "@/helpers/date-time";
+import { convertTimeToDateTime, isTimeValid } from "@/helpers/date-time";
 
 export const DateInput = (props) => {
 	const {
@@ -18,8 +18,8 @@ export const DateInput = (props) => {
 	useEffect(() => {
 		if (defaultValue) {
 			if (isTimeValid(defaultValue)) {
-				console.log("defaultValue:", defaultValue);
-				setVal(defaultValue);
+				// Burasi duzeltilecek
+				setVal(convertTimeToDateTime(defaultValue));
 			} else {
 				setVal(new Date(defaultValue));
 			}

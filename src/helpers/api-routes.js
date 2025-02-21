@@ -41,3 +41,13 @@ export const PROGRAM_GET_BY_STUDENT_API_ROUTE = `${appConfig.apiURL}/lessonProgr
 
 export const PROGRAM_CREATE_API_ROUTE = `${appConfig.apiURL}/lessonPrograms/save`;
 export const PROGRAM_DELETE_API_ROUTE = `${appConfig.apiURL}/lessonPrograms/delete`;
+
+
+
+export const TEACHER_GET_ALL_BY_PAGE_API_ROUTE = `${appConfig.apiURL}/teachers/search`;
+export const TEACHER_GET_ALL_API_ROUTE = `${appConfig.apiURL}/teachers/getAll`;
+export const TEACHER_GET_BY_ID_API_ROUTE = `${appConfig.apiURL}/teachers/getSavedTeacherById`;
+export const TEACHER_CREATE_API_ROUTE = `${appConfig.apiURL}/teachers/save`;
+export const TEACHER_DELETE_API_ROUTE = `${appConfig.apiURL}/teachers/delete`;
+export const TEACHER_UPDATE_API_ROUTE = `${appConfig.apiURL}/teachers/update`;
+export const TEACHER_ASSIGN_PROGRAM_API_ROUTE = `${appConfig.apiURL}/teachers/chooseLesson`;

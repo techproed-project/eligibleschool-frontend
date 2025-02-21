@@ -4,7 +4,9 @@ import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import { MultiSelect } from "primereact/multiselect";
 
 export const MultipleSelectInput = (props) => {
+
 	const {
+		id,
 		label,
 		error,
 		options,
@@ -19,7 +21,7 @@ export const MultipleSelectInput = (props) => {
 
 	return (
 		<FormGroup className={className} controlId={rest.name}>
-			<input type="hidden" name={rest?.name} value={JSON.stringify(selectedItems)}/>
+			<input type="hidden" name={id} value={JSON.stringify(selectedItems)}/>
 			<FormLabel>{label}</FormLabel>
 
 			<FormControl
