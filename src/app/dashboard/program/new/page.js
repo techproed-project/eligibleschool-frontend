@@ -18,6 +18,8 @@ const Page = async () => {
 		label: `${getTermLabel(item.term)} - ${formatDateMY(item.startDate)}`,
 	}));
 
+
+
 	return (
 		<>
 			<PageHeader title="New Program" />

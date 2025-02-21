@@ -17,10 +17,10 @@
 .p-datatable-table {
 	width: 100%;
 	border-collapse: separate;
+	border-spacing: 1px;
 
 	th {
 		background-color: $color1-op-30;
-		margin: 4px;
 	}
 
 	@media (max-width: 768px) {
@@ -65,3 +65,16 @@
 		
 	}
 }
+
+
+.form-control.p-multiselect{
+	display: inline-flex !important;
+	padding:0;
+
+	.p-placeholder{
+		font-size:1.2rem;
+	}
+}
+
+
+ 

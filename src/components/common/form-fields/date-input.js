@@ -3,6 +3,7 @@ import { Calendar } from "primereact/calendar";
 import React, { useEffect, useState } from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import "./date-input.scss";
+import { isTimeValid } from "@/helpers/date-time";
 
 export const DateInput = (props) => {
 	const {
@@ -16,7 +17,12 @@ export const DateInput = (props) => {
 
 	useEffect(() => {
 		if (defaultValue) {
-			setVal(new Date(defaultValue));
+			if (isTimeValid(defaultValue)) {
+				console.log("defaultValue:", defaultValue);
+				setVal(defaultValue);
+			} else {
+				setVal(new Date(defaultValue));
+			}
 		}
 	}, [defaultValue]);
 
@@ -29,6 +35,7 @@ export const DateInput = (props) => {
 				size="lg"
 				as={Calendar}
 				value={val}
+				onChange={(e) => setVal(e.value)}
 				{...rest}
 			/>
 

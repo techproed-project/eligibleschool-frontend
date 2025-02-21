@@ -13,6 +13,8 @@ import { revalidatePath } from "next/cache";
 export const createProgramAction = async (prevState, formData) => {
 	const fields = convertFormDataToJSON(formData);
 
+	console.log(fields);
+
 	try {
 		ProgramSchema.validateSync(fields, { abortEarly: false });
 

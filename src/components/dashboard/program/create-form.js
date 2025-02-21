@@ -7,19 +7,22 @@ import {
 	SubmitButton,
 } from "@/components/common/form-fields";
 import { BackButton } from "@/components/common/form-fields/back-button";
-import { appConfig } from "@/helpers/config";
+import { MultipleSelectInput } from "@/components/common/form-fields/multiple-select-input";
 import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-export const ProgramCreateForm = ({ terms }) => {
+export const ProgramCreateForm = ({ terms, lessons }) => {
 	const [state, formAction, isLoading] = useActionState(
 		createProgramAction,
 		initialState
 	);
 	const router = useRouter();
+
+
+	console.log(lessons)
 
 	useEffect(() => {
 		if (state?.message) {
@@ -33,6 +36,15 @@ export const ProgramCreateForm = ({ terms }) => {
 	return (
 		<FormContainer>
 			<Form action={formAction}>
+				<MultipleSelectInput
+					name="lessonIdList"
+					label="Lessons"
+					error={state?.errors?.lessonIdList}
+					options={lessons}
+					optionLabel="lessonName"
+					optionValue="lessonId"
+				/>
+
 				<SelectInput
 					name="educationTermId"
 					label="Education Term"
@@ -50,6 +62,7 @@ export const ProgramCreateForm = ({ terms }) => {
 					error={state?.errors?.startTime}
 					timeOnly
 					defaultValue={state?.data?.startTime ?? ""}
+					key={`startTime-${isLoading}`}
 				/>
 
 				<DateInput
@@ -58,6 +71,7 @@ export const ProgramCreateForm = ({ terms }) => {
 					error={state?.errors?.stopTime}
 					timeOnly
 					defaultValue={state?.data?.stopTime ?? ""}
+					key={`stopTime-${isLoading}`}
 				/>
 
 				<ButtonGroup className="w-100">
