@@ -22,8 +22,6 @@ export const ProgramCreateForm = ({ terms, lessons }) => {
 	);
 	const router = useRouter();
 
-	console.log(state);
-
 	useEffect(() => {
 		if (state?.message) {
 			swAlert(state.message, state.ok ? "success" : "error");

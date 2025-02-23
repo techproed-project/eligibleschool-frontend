@@ -18,7 +18,6 @@ export const DateInput = (props) => {
 	useEffect(() => {
 		if (defaultValue) {
 			if (isTimeValid(defaultValue)) {
-				// Burasi duzeltilecek
 				setVal(convertTimeToDateTime(defaultValue));
 			} else {
 				setVal(new Date(defaultValue));

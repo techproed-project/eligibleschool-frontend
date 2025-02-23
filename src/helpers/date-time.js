@@ -25,5 +25,5 @@ export const isTimeValid = (time) => {
 
 export const convertTimeToDateTime = (time) => {
 	const dateTimeStr = `2000-01-01 ${time}`;
-	return moment(dateTimeStr, "YYYY-MM-DD HH:mm:ss");
+	return new Date(dateTimeStr);
 }
