@@ -1,5 +1,5 @@
 "use client";
-import { updateTeacherAction } from "@/actions/teacher-action";
+import { updateStudentAction } from "@/actions/student-action";
 import {
 	FormContainer,
 	TextInput,
@@ -10,16 +10,14 @@ import {
 	SubmitButton,
 } from "@/components/common/form-fields";
 import { BackButton } from "@/components/common/form-fields/back-button";
-import { CheckInput } from "@/components/common/form-fields/check-input";
-import { MultipleSelectInput } from "@/components/common/form-fields/multiple-select-input";
 import { appConfig } from "@/helpers/config";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-export const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
-	const [state, formAction, isLoading] = useActionState(updateTeacherAction, {
+export const StudentEditForm = ({ user, teachers }) => {
+	const [state, formAction, isLoading] = useActionState(updateStudentAction, {
 		data: user,
 	});
 
@@ -29,7 +27,7 @@ export const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
 		if (state?.message) {
 			swAlert(state.message, state.ok ? "success" : "error");
 			if (state.ok) {
-				router.push("/dashboard/teacher");
+				router.push("/dashboard/student");
 			}
 		}
 	}, [state]);
@@ -85,23 +83,15 @@ export const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
 					defaultValue={state?.data?.email ?? ""}
 				/>
 
-				<CheckInput
-					label="Is advisor teacher?"
-					name="isAdvisorTeacher"
-					type="checkbox"
-					defaultChecked={state?.data?.isAdvisorTeacher ?? "true"}
-					value="true"	
-				/>
-
-				<MultipleSelectInput
-					id="lessonsIdList"
-					name="abc"
-					label="Programs"
-					error={state?.errors?.lessonsIdList}
-					options={programs}
+				<SelectInput
+					name="advisorTeacherId"
+					label="Advisor"
+					error={state?.errors?.advisorTeacherId}
+					options={teachers}
 					optionLabel="label"
 					optionValue="value"
-					values={teacherProgramIdList}
+					defaultValue={state?.data?.advisorTeacherId ?? ""}
+					key={`advisorTeacherId-${isLoading}`}
 				/>
 
 				<MaskedInput
@@ -118,6 +108,20 @@ export const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
 					error={state?.errors?.ssn}
 					mask="999-99-9999"
 					value={state?.data?.ssn ?? ""}
+				/>
+
+				<TextInput
+					label="Father Name"
+					name="fatherName"
+					error={state?.errors?.fatherName}
+					defaultValue={state?.data?.fatherName ?? ""}
+				/>
+
+				<TextInput
+					label="Mother Name"
+					name="motherName"
+					error={state?.errors?.motherName}
+					defaultValue={state?.data?.motherName ?? ""}
 				/>
 
 				<TextInput

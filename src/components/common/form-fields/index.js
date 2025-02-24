@@ -5,6 +5,9 @@ import { FormContainer } from "./form-container";
 import { SelectInput } from "./select-input";
 import { DateInput } from "./date-input";
 import { MaskedInput } from "./masked-input";
+import { BackButton } from "./back-button";
+import { MultipleSelectInput } from "./multiple-select-input";
+import { CheckInput } from "./check-input";
 
 export {
 	TextInput,
@@ -13,5 +16,8 @@ export {
 	FormContainer,
 	SelectInput,
 	DateInput,
-    MaskedInput
+	MaskedInput,
+	BackButton,
+	MultipleSelectInput,
+	CheckInput,
 };

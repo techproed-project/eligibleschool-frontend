@@ -38,7 +38,7 @@ export const getAllStudentsByAdvisor = async () => {
 };
 
 export const getStudentById = async (id) => {
-	return fetch(`${STUDENT_GET_BY_ID_API_ROUTE}/${id}`, {
+	return fetch(`${STUDENT_GET_BY_ID_API_ROUTE}?id=${id}`, {
 		method: "GET",
 		headers: await getAuthHeader(),
 	});

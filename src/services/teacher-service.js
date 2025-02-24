@@ -1,4 +1,5 @@
 import {
+	ADVISOR_TEACHER_GET_ALL_API_ROUTE,
 	TEACHER_ASSIGN_PROGRAM_API_ROUTE,
 	TEACHER_CREATE_API_ROUTE,
 	TEACHER_DELETE_API_ROUTE,
@@ -24,6 +25,13 @@ export const getAllTeachersByPage = async (
 
 export const getAllTeachers = async () => {
 	return fetch(`${TEACHER_GET_ALL_API_ROUTE}`, {
+		method: "GET",
+		headers: await getAuthHeader(),
+	});
+};
+
+export const getAllAdvisorTeachers = async () => {
+	return fetch(`${ADVISOR_TEACHER_GET_ALL_API_ROUTE}`, {
 		method: "GET",
 		headers: await getAuthHeader(),
 	});

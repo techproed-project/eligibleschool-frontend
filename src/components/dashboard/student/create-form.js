@@ -1,5 +1,5 @@
 "use client";
-import { createTeacherAction } from "@/actions/teacher-action";
+import { createStudentAction } from "@/actions/student-action";
 import {
 	FormContainer,
 	TextInput,
@@ -11,7 +11,6 @@ import {
 } from "@/components/common/form-fields";
 import { BackButton } from "@/components/common/form-fields/back-button";
 import { CheckInput } from "@/components/common/form-fields/check-input";
-import { MultipleSelectInput } from "@/components/common/form-fields/multiple-select-input";
 import { appConfig } from "@/helpers/config";
 import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
@@ -19,9 +18,9 @@ import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-export const TeacherCreateForm = ({ programs }) => {
+export const StudentCreateForm = ({ teachers }) => {
 	const [state, formAction, isLoading] = useActionState(
-		createTeacherAction,
+		createStudentAction,
 		initialState
 	);
 	const router = useRouter();
@@ -30,7 +29,7 @@ export const TeacherCreateForm = ({ programs }) => {
 		if (state?.message) {
 			swAlert(state.message, state.ok ? "success" : "error");
 			if (state.ok) {
-				router.push("/dashboard/teacher");
+				router.push("/dashboard/student");
 			}
 		}
 	}, [state]);
@@ -85,21 +84,15 @@ export const TeacherCreateForm = ({ programs }) => {
 					defaultValue={state?.data?.email ?? ""}
 				/>
 
-				<CheckInput
-					label="Is advisor teacher?"
-					name="isAdvisorTeacher"
-					type="checkbox"
-					defaultValue={state?.data?.isAdvisorTeacher ?? "true"}
-				/>
-
-				<MultipleSelectInput
-					id="lessonsIdList"
-					name="abc"
-					label="Programs"
-					error={state?.errors?.lessonsIdList}
-					options={programs}
+				<SelectInput
+					name="advisorTeacherId"
+					label="Advisor"
+					error={state?.errors?.advisorTeacherId}
+					options={teachers}
 					optionLabel="label"
 					optionValue="value"
+					defaultValue={state?.data?.advisorTeacherId ?? ""}
+					key={`advisorTeacherId-${isLoading}`}
 				/>
 
 				<MaskedInput
@@ -116,6 +109,20 @@ export const TeacherCreateForm = ({ programs }) => {
 					error={state?.errors?.ssn}
 					mask="999-99-9999"
 					value={state?.data?.ssn ?? ""}
+				/>
+
+				<TextInput
+					label="Father Name"
+					name="fatherName"
+					error={state?.errors?.fatherName}
+					defaultValue={state?.data?.fatherName ?? ""}
+				/>
+
+				<TextInput
+					label="Mother Name"
+					name="motherName"
+					error={state?.errors?.motherName}
+					defaultValue={state?.data?.motherName ?? ""}
 				/>
 
 				<TextInput

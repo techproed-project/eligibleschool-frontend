@@ -6,8 +6,9 @@ import {
 	transformYupErrors,
 	YupValidationError,
 } from "@/helpers/form-validation";
+import { ChooseLessonSchema } from "@/helpers/schemes/choose-lesson-schema";
 import { StudentSchema } from "@/helpers/schemes/student-schema";
-import { deleteStudent } from "@/services/student-service";
+import { assignProgramToStudent, createStudent, deleteStudent, updateStudent } from "@/services/student-service";
 import { revalidatePath } from "next/cache";
 
 export const createStudentAction = async (prevState, formData) => {
@@ -16,7 +17,7 @@ export const createStudentAction = async (prevState, formData) => {
 	try {
 		StudentSchema.validateSync(fields, { abortEarly: false });
 
-		const res = await createTeacher(fields);
+		const res = await createStudent(fields);
 		const data = await res.json();
 
 		if (!res.ok) {
@@ -40,7 +41,7 @@ export const updateStudentAction = async (prevState, formData) => {
 	try {
 		StudentSchema.validateSync(fields, { abortEarly: false });
 
-		const res = await updateTeacher(payload);
+		const res = await updateStudent(fields);
 		const data = await res.json();
 
 		if (!res.ok) {
@@ -58,21 +59,21 @@ export const updateStudentAction = async (prevState, formData) => {
 	}
 };
 
-export const assignProgramToTeacherAction = async (prevState, formData) => {
+export const assignProgramToStudentAction = async (prevState, formData) => {
 	const fields = convertFormDataToJSON(formData);
 
 	try {
-		ProgramAssignmentSchema.validateSync(fields, { abortEarly: false });
+		ChooseLessonSchema.validateSync(fields, { abortEarly: false });
 
-		const res = await assignProgramToTeacher(fields);
+		const res = await assignProgramToStudent(fields);
 		const data = await res.json();
 
 		if (!res.ok) {
 			return response(false, fields, data?.message, data?.validations);
 		}
 
-		revalidatePath("/dashboard/program");
-		return response(true, fields, "Program was assigned to teacher");
+		revalidatePath("/dashboard/choose-lesson");
+		return response(true, fields, "Program was assigned to student");
 	} catch (err) {
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner, fields);
