@@ -6,36 +6,25 @@ import {
 	transformYupErrors,
 	YupValidationError,
 } from "@/helpers/form-validation";
-import { ProgramAssignmentSchema } from "@/helpers/schemes/program-assignment-schema";
-import { TeacherSchema } from "@/helpers/schemes/teacher-schema";
-import {
-	assignProgramToTeacher,
-	createTeacher,
-	deleteTeacher,
-	updateTeacher,
-} from "@/services/teacher-service";
+import { StudentSchema } from "@/helpers/schemes/student-schema";
+import { deleteStudent } from "@/services/student-service";
 import { revalidatePath } from "next/cache";
 
-export const createTeacherAction = async (prevState, formData) => {
+export const createStudentAction = async (prevState, formData) => {
 	const fields = convertFormDataToJSON(formData);
 
 	try {
-		TeacherSchema.validateSync(fields, { abortEarly: false });
+		StudentSchema.validateSync(fields, { abortEarly: false });
 
-		const payload = {
-			...fields,
-			lessonsIdList: JSON.parse(fields.lessonsIdList),
-		};
-
-		const res = await createTeacher(payload);
+		const res = await createTeacher(fields);
 		const data = await res.json();
 
 		if (!res.ok) {
 			return response(false, fields, data?.message, data?.validations);
 		}
 
-		revalidatePath("/dashboard/teacher");
-		return response(true, fields, "Teacher was created");
+		revalidatePath("/dashboard/student");
+		return response(true, fields, "Student was created");
 	} catch (err) {
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner, fields);
@@ -45,28 +34,21 @@ export const createTeacherAction = async (prevState, formData) => {
 	}
 };
 
-export const updateTeacherAction = async (prevState, formData) => {
+export const updateStudentAction = async (prevState, formData) => {
 	const fields = convertFormDataToJSON(formData);
 
 	try {
-		TeacherSchema.validateSync(fields, { abortEarly: false });
-
-		const payload = {
-			...fields,
-			lessonsIdList: JSON.parse(fields.lessonsIdList),
-		};
+		StudentSchema.validateSync(fields, { abortEarly: false });
 
 		const res = await updateTeacher(payload);
 		const data = await res.json();
-
-		console.log(data)
 
 		if (!res.ok) {
 			return response(false, fields, data?.message, data?.validations);
 		}
 
-		revalidatePath("/dashboard/teacher");
-		return response(true, fields, "Teacher was updated");
+		revalidatePath("/dashboard/student");
+		return response(true, fields, "Student was updated");
 	} catch (err) {
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner, fields);
@@ -100,17 +82,17 @@ export const assignProgramToTeacherAction = async (prevState, formData) => {
 	}
 };
 
-export const deleteTeacherAction = async (id) => {
+export const deleteStudentAction = async (id) => {
 	if (!id) throw new Error("Id is missing");
 
-	const res = await deleteTeacher(id);
+	const res = await deleteStudent(id);
 	const data = await res.json();
 
 	if (!res.ok) {
 		return response(false, {}, "User could not be deleted");
 	}
 
-	revalidatePath("/dashboard/teacher");
+	revalidatePath("/dashboard/student");
 
-	return response(true, {}, "Teacher was deleted");
+	return response(true, {}, "Student was deleted");
 };

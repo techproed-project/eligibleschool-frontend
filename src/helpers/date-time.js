@@ -19,7 +19,8 @@ export const isLater = (timeBefore, timeAfter) => {
 };
 
 export const isTimeValid = (time) => {
-	return moment(time, "HH:mm").isValid();
+	const regex = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
+	return regex.test(time);
 };
 
 

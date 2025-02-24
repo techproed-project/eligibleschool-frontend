@@ -1,5 +1,5 @@
 "use client";
-import { updateTeacherAction } from "@/actions/teacher-action";
+import { createTeacherAction } from "@/actions/teacher-action";
 import {
 	FormContainer,
 	TextInput,
@@ -13,16 +13,17 @@ import { BackButton } from "@/components/common/form-fields/back-button";
 import { CheckInput } from "@/components/common/form-fields/check-input";
 import { MultipleSelectInput } from "@/components/common/form-fields/multiple-select-input";
 import { appConfig } from "@/helpers/config";
+import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-export const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
-	const [state, formAction, isLoading] = useActionState(updateTeacherAction, {
-		data: user,
-	});
-
+export const TeacherCreateForm = ({ programs }) => {
+	const [state, formAction, isLoading] = useActionState(
+		createTeacherAction,
+		initialState
+	);
 	const router = useRouter();
 
 	useEffect(() => {
@@ -37,7 +38,6 @@ export const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
 	return (
 		<FormContainer>
 			<Form action={formAction}>
-				<input type="hidden" name="id" value={user.id} />
 				<TextInput
 					label="First Name"
 					name="name"
@@ -89,8 +89,7 @@ export const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
 					label="Is advisor teacher?"
 					name="isAdvisorTeacher"
 					type="checkbox"
-					defaultChecked={state?.data?.isAdvisorTeacher ?? "true"}
-					value="true"	
+					defaultValue={state?.data?.isAdvisorTeacher ?? "true"}
 				/>
 
 				<MultipleSelectInput
@@ -101,7 +100,6 @@ export const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
 					options={programs}
 					optionLabel="label"
 					optionValue="value"
-					values={teacherProgramIdList}
 				/>
 
 				<MaskedInput
@@ -143,7 +141,7 @@ export const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
 
 				<ButtonGroup className="w-100">
 					<BackButton />
-					<SubmitButton title="Update" />
+					<SubmitButton title="Create" />
 				</ButtonGroup>
 			</Form>
 		</FormContainer>
