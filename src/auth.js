@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { login } from "./services/auth-service";
 import { NextResponse } from "next/server";
-import { getIsTokenValid } from "./helpers/auth-helper";
+import { getIsTokenValid, getIsUserAuthorized } from "./helpers/auth-helper";
 
 const config = {
 	providers: [
@@ -30,26 +30,32 @@ const config = {
 		// middleware in kapsama alanina giren sayfalara bir istek yapildiginda bu callback calisir. Kullanici sayfaya yonlendirilmeden once calisir. Buradan donen deger true ise kullanici hedef sayfaya yonlendirilir, eger false donerse kullanici hedef sayfaya giremez.
 		authorized({ auth, request }) {
 			const { pathname, searchParams, origin } = request.nextUrl;
-			
-			const isLoggedIn = !!auth?.user;
+
+			const userRole = auth?.user?.role;
+			const isLoggedIn = !!userRole;
 			const isInLoginPage = pathname.startsWith("/login");
 			const isInDashboardPages = pathname.startsWith("/dashboard");
 			const isAPITokenValid = getIsTokenValid(auth?.accessToken);
 
-			if(isLoggedIn && isAPITokenValid){
-				if(isInLoginPage){
-					const url = searchParams.get("callbackUrl") || `${origin}/dashboard`;
+			if (isLoggedIn && isAPITokenValid) {
+				if (isInLoginPage) {
+					const url =
+						searchParams.get("callbackUrl") ||
+						`${origin}/dashboard`;
 					return NextResponse.redirect(url);
+				} else if (isInDashboardPages) {
+					const isUserAuthorized = getIsUserAuthorized(
+						userRole,
+						pathname
+					);
+					if (!isUserAuthorized) {
+						const url = `${origin}/unauthorized`;
+						return NextResponse.redirect(url);
+					}
 				}
-				else if(isInDashboardPages){
-					
-				}
-
-			}
-			else if(isInDashboardPages){
+			} else if (isInDashboardPages) {
 				return false;
 			}
-
 
 			return true;
 		},
@@ -61,12 +67,10 @@ const config = {
 
 		// Uygulamada Session bilgisine ihtiyac duyuldugunda burasi calisir
 		async session({ session, token }) {
-
 			const { accessToken, user } = token;
 			const isAPITokenValid = getIsTokenValid(accessToken);
-			if(!isAPITokenValid) return null;
+			if (!isAPITokenValid) return null;
 
-			
 			session.user = user;
 			session.accessToken = accessToken;
 

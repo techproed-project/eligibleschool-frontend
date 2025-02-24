@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { appConfig } from "./config";
 
 export const getAuthHeader = async () => {
 	const session = await auth();
@@ -34,4 +35,16 @@ export const getIsTokenValid = (token) => {
 	// SANIYE degerini MILI SANIYEYE cevirirerek DATE TIME nesnesi olusturur.
 
 	return jwtExpireDateTime > new Date();
+};
+
+export const getIsUserAuthorized = (role, targetPath) => {
+	if (!role || !targetPath) return false;
+	
+	const userRight = appConfig.userRightsOnRoutes.find((item) =>
+		item.urlRegex.test(targetPath)
+	);
+
+	if (!userRight) return false;
+
+	return userRight.roles.includes(role);
 };

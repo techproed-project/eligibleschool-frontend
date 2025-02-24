@@ -1,6 +1,7 @@
 import { appConfig } from "./config";
 
 export const CONTACT_CREATE_API_ROUTE = `${appConfig.apiURL}/contactMessages/save`;
+export const CONTACT_GET_ALL_BY_PAGE_API_ROUTE = `${appConfig.apiURL}/contactMessages/getAll`;
 
 export const LOGIN_API_ROUTE = `${appConfig.apiURL}/auth/login`;
 
@@ -50,7 +51,6 @@ export const TEACHER_DELETE_API_ROUTE = `${appConfig.apiURL}/teachers/delete`;
 export const TEACHER_UPDATE_API_ROUTE = `${appConfig.apiURL}/teachers/update`;
 export const TEACHER_ASSIGN_PROGRAM_API_ROUTE = `${appConfig.apiURL}/teachers/chooseLesson`;
 export const ADVISOR_TEACHER_GET_ALL_API_ROUTE = `${appConfig.apiURL}/advisorTeacher/getAll`;
-
 
 export const STUDENT_GET_ALL_BY_PAGE_API_ROUTE = `${appConfig.apiURL}/students/search`;
 export const STUDENT_GET_ALL_API_ROUTE = `${appConfig.apiURL}/students/getAll`;
