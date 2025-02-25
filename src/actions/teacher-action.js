@@ -59,7 +59,7 @@ export const updateTeacherAction = async (prevState, formData) => {
 		const res = await updateTeacher(payload);
 		const data = await res.json();
 
-		console.log(data)
+		console.log(data);
 
 		if (!res.ok) {
 			return response(false, fields, data?.message, data?.validations);
@@ -80,9 +80,18 @@ export const assignProgramToTeacherAction = async (prevState, formData) => {
 	const fields = convertFormDataToJSON(formData);
 
 	try {
+		fields.lessonProgramId = JSON.parse(fields.lessonProgramId);
+
+		const payload = {
+			...fields,
+			lessonProgramId: fields.lessonProgramId.map(
+				(item) => item.lessonProgramId
+			),
+		};
+
 		ProgramAssignmentSchema.validateSync(fields, { abortEarly: false });
 
-		const res = await assignProgramToTeacher(fields);
+		const res = await assignProgramToTeacher(payload);
 		const data = await res.json();
 
 		if (!res.ok) {
