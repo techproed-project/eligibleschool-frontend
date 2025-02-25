@@ -2,13 +2,12 @@
 @use "../../styles/mixins" as *;
 
 .page-header {
-	background-image: linear-gradient(30deg, $color2, $color3, $color2);
 	background-image: linear-gradient(
-    50deg,
-    darken($color3, 15%),
-    darken($color1, 15%),
-    darken($color3, 15%)
-  );
+		50deg,
+		darken($color3, 15%),
+		darken($color1, 15%),
+		darken($color3, 15%)
+	);
 	text-align: center;
 	padding: 25px 0;
 	font-weight: 600;

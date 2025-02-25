@@ -4,9 +4,9 @@ import {
 	FormContainer,
 	SubmitButton,
 	TextInput,
+	BackButton,
+	CheckInput
 } from "@/components/common/form-fields";
-import { BackButton } from "@/components/common/form-fields/back-button";
-import { CheckInput } from "@/components/common/form-fields/check-input";
 import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";

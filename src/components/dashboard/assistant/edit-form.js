@@ -8,8 +8,8 @@ import {
 	MaskedInput,
 	PasswordInput,
 	SubmitButton,
+	BackButton 
 } from "@/components/common/form-fields";
-import { BackButton } from "@/components/common/form-fields/back-button";
 import { appConfig } from "@/helpers/config";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";

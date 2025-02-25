@@ -8,10 +8,10 @@ import {
 	MaskedInput,
 	PasswordInput,
 	SubmitButton,
+	BackButton,
+	CheckInput,
+	MultipleSelectInput,
 } from "@/components/common/form-fields";
-import { BackButton } from "@/components/common/form-fields/back-button";
-import { CheckInput } from "@/components/common/form-fields/check-input";
-import { MultipleSelectInput } from "@/components/common/form-fields/multiple-select-input";
 import { appConfig } from "@/helpers/config";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
@@ -90,7 +90,7 @@ export const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
 					name="isAdvisorTeacher"
 					type="checkbox"
 					defaultChecked={state?.data?.isAdvisorTeacher ?? "true"}
-					value="true"	
+					value="true"
 				/>
 
 				<MultipleSelectInput

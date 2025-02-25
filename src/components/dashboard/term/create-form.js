@@ -5,8 +5,8 @@ import {
 	SelectInput,
 	DateInput,
 	SubmitButton,
+	BackButton,
 } from "@/components/common/form-fields";
-import { BackButton } from "@/components/common/form-fields/back-button";
 import { appConfig } from "@/helpers/config";
 import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
