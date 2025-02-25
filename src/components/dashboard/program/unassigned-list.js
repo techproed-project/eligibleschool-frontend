@@ -1,5 +1,5 @@
 "use client";
-import React, { useActionState, useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -9,6 +9,7 @@ import { formatTimeLT } from "@/helpers/date-time";
 import { assignProgramToTeacherAction } from "@/actions/teacher-action";
 import { initialState } from "@/helpers/form-validation";
 import { SelectInput, SubmitButton } from "@/components/common/form-fields";
+import { swAlert } from "@/helpers/swal";
 
 export const UnassignedProgramList = ({ programs, teachers }) => {
 	const [state, formAction, isLoading] = useActionState(
@@ -27,6 +28,12 @@ export const UnassignedProgramList = ({ programs, teachers }) => {
 	const formatDay = (row) => {
 		return getDayLabel(row.day);
 	};
+
+	useEffect(() => {
+		if (state?.message) {
+			swAlert(state.message, state.ok ? "success" : "error");
+		}
+	}, [state]);
 
 	return (
 		<Container>

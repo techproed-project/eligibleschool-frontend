@@ -60,3 +60,11 @@ export const STUDENT_CREATE_API_ROUTE = `${appConfig.apiURL}/students/save`;
 export const STUDENT_DELETE_API_ROUTE = `${appConfig.apiURL}/students/delete`;
 export const STUDENT_UPDATE_API_ROUTE = `${appConfig.apiURL}/students/update`;
 export const STUDENT_ASSIGN_PROGRAM_API_ROUTE = `${appConfig.apiURL}/students/chooseLesson`;
+
+export const STUDENT_INFO_GET_BY_TEACHER_API_ROUTE = `${appConfig.apiURL}/studentInfo/getAllForTeacher`;
+
+export const STUDENT_INFO_GET_BY_STUDENT_API_ROUTE = `${appConfig.apiURL}/studentInfo/getAllByStudent`;
+export const STUDENT_INFO_GET_BY_ID_API_ROUTE = `${appConfig.apiURL}/studentInfo/get`;
+export const STUDENT_INFO_CREATE_API_ROUTE = `${appConfig.apiURL}/studentInfo/save`;
+export const STUDENT_INFO_DELETE_API_ROUTE = `${appConfig.apiURL}/studentInfo/delete`;
+export const STUDENT_INFO_UPDATE_API_ROUTE = `${appConfig.apiURL}/studentInfo/update`;

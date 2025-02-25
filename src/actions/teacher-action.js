@@ -35,6 +35,9 @@ export const createTeacherAction = async (prevState, formData) => {
 		}
 
 		revalidatePath("/dashboard/teacher");
+		revalidatePath("/dashboard/program");
+
+
 		return response(true, fields, "Teacher was created");
 	} catch (err) {
 		if (err instanceof YupValidationError) {
@@ -66,6 +69,8 @@ export const updateTeacherAction = async (prevState, formData) => {
 		}
 
 		revalidatePath("/dashboard/teacher");
+		revalidatePath("/dashboard/program");
+		
 		return response(true, fields, "Teacher was updated");
 	} catch (err) {
 		if (err instanceof YupValidationError) {
@@ -80,6 +85,9 @@ export const assignProgramToTeacherAction = async (prevState, formData) => {
 	const fields = convertFormDataToJSON(formData);
 
 	try {
+		
+		ProgramAssignmentSchema.validateSync(fields, { abortEarly: false });
+
 		fields.lessonProgramId = JSON.parse(fields.lessonProgramId);
 
 		const payload = {
@@ -89,7 +97,6 @@ export const assignProgramToTeacherAction = async (prevState, formData) => {
 			),
 		};
 
-		ProgramAssignmentSchema.validateSync(fields, { abortEarly: false });
 
 		const res = await assignProgramToTeacher(payload);
 		const data = await res.json();
