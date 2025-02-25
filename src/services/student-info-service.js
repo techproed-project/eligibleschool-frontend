@@ -25,7 +25,7 @@ export const getAllInfoForStudentByPage = async (page = 0, size = 20) => {
 };
 
 export const getStudentInfoById = async (id) => {
-	return fetch(`${STUDENT_INFO_GET_BY_ID_API_ROUTE}?id=${id}`, {
+	return fetch(`${STUDENT_INFO_GET_BY_ID_API_ROUTE}/${id}`, {
 		method: "GET",
 		headers: await getAuthHeader(),
 	});

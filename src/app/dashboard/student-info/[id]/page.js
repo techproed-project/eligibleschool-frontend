@@ -1,29 +1,59 @@
 import { PageHeader } from "@/components/common/page-header";
 import { Spacer } from "@/components/common/spacer";
-import { StudentEditForm } from "@/components/dashboard/student/edit-form";
-import { getStudentById } from "@/services/student-service";
-import { getAllAdvisorTeachers } from "@/services/teacher-service";
+import { StudentInfoEditForm } from "@/components/dashboard/student-info/edit-form";
+import { formatDateMY } from "@/helpers/date-time";
+import { getTermLabel } from "@/helpers/misc";
+import { getAllLessons } from "@/services/lesson-service";
+import { getStudentInfoById } from "@/services/student-info-service";
+import { getAllStudentsByAdvisor } from "@/services/student-service";
+import { getAllTerms } from "@/services/term-service";
 import React from "react";
 
 const Page = async ({ params }) => {
 	const { id } = await params;
 
-	const dataStudent = (await getStudentById(id)).json();
-	const dataTeachers = (await getAllAdvisorTeachers()).json();
+	const infoData = (await getStudentInfoById(id)).json();
+	const studentsData = (await getAllStudentsByAdvisor()).json();
+	const lessonsData = (await getAllLessons()).json();
+	const termsData = (await getAllTerms()).json();
 
-	const [student, teachers] = await Promise.all([dataStudent, dataTeachers]);
+	const [info, students, lessons, terms] = await Promise.all([
+		infoData,
+		studentsData,
+		lessonsData,
+		termsData,
+	]);
 
-	const newTeachers = teachers.map((item) => ({
-		value: item.advisorTeacherId,
-		label: `${item.teacherName} ${item.teacherSurname}`,
+
+	const newInfo = {
+		...info,
+		studentId: info.studentResponse.userId
+	}
+
+	let newStudents = [];
+
+	if (Array.isArray(students)) {
+		newStudents = students.map((item) => ({
+			value: item.userId,
+			label: `${item.name} ${item.surname}`,
+		}));
+	}
+
+	const newTerms = terms.map((item) => ({
+		value: item.id,
+		label: `${getTermLabel(item.term)} - ${formatDateMY(item.startDate)}`,
 	}));
-
 
 	return (
 		<>
-			<PageHeader title="Edit Student" />
+			<PageHeader title="Edit Info" />
 			<Spacer />
-			<StudentEditForm user={student} teachers={newTeachers} />
+			<StudentInfoEditForm
+				info={newInfo}
+				students={newStudents}
+				lessons={lessons}
+				terms={newTerms}
+			/>
 			<Spacer />
 		</>
 	);

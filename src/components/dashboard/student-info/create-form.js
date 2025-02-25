@@ -4,13 +4,9 @@ import {
 	FormContainer,
 	TextInput,
 	SelectInput,
-	DateInput,
-	MaskedInput,
-	PasswordInput,
 	SubmitButton,
 	BackButton,
 } from "@/components/common/form-fields";
-import { appConfig } from "@/helpers/config";
 import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
