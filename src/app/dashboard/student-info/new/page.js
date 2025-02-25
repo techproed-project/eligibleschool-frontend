@@ -1,23 +1,47 @@
 import { PageHeader } from "@/components/common/page-header";
 import { Spacer } from "@/components/common/spacer";
-import { StudentCreateForm } from "@/components/dashboard/student/create-form";
-import { getAllAdvisorTeachers } from "@/services/teacher-service";
+import { StudentInfoCreateForm } from "@/components/dashboard/student-info/create-form";
+import { formatDateMY } from "@/helpers/date-time";
+import { getTermLabel } from "@/helpers/misc";
+import { getAllLessons } from "@/services/lesson-service";
+import { getAllStudentsByAdvisor } from "@/services/student-service";
+import { getAllTerms } from "@/services/term-service";
 import React from "react";
 
 const Page = async () => {
-	const res = await getAllAdvisorTeachers();
-	const data = await res.json();
+	const studentsData = (await getAllStudentsByAdvisor()).json();
+	const lessonsData = (await getAllLessons()).json();
+	const termsData = (await getAllTerms()).json();
 
-	const teachers = data.map((item) => ({
-		value: item.advisorTeacherId,
-		label: `${item.teacherName} ${item.teacherSurname}`,
+	const [students, lessons, terms] = await Promise.all([
+		studentsData,
+		lessonsData,
+		termsData,
+	]);
+
+	let newStudents = [];
+
+	if (Array.isArray(students)) {
+		newStudents = students.map((item) => ({
+			value: item.userId,
+			label: `${item.name} ${item.surname}`,
+		}));
+	}
+
+	const newTerms = terms.map((item) => ({
+		value: item.id,
+		label: `${getTermLabel(item.term)} - ${formatDateMY(item.startDate)}`,
 	}));
 
 	return (
 		<>
-			<PageHeader title="New Student" />
+			<PageHeader title="New Info" />
 			<Spacer />
-			<StudentCreateForm teachers={teachers} />
+			<StudentInfoCreateForm
+				students={newStudents}
+				lessons={lessons}
+				terms={newTerms}
+			/>
 			<Spacer />
 		</>
 	);

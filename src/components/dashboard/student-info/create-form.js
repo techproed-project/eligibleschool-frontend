@@ -1,5 +1,5 @@
 "use client";
-import { createStudentAction } from "@/actions/student-action";
+import { createStudentInfoAction } from "@/actions/student-info-action";
 import {
 	FormContainer,
 	TextInput,
@@ -8,7 +8,7 @@ import {
 	MaskedInput,
 	PasswordInput,
 	SubmitButton,
-	BackButton
+	BackButton,
 } from "@/components/common/form-fields";
 import { appConfig } from "@/helpers/config";
 import { initialState } from "@/helpers/form-validation";
@@ -17,9 +17,9 @@ import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-export const StudentCreateForm = ({ teachers }) => {
+export const StudentInfoCreateForm = ({ students, lessons, terms }) => {
 	const [state, formAction, isLoading] = useActionState(
-		createStudentAction,
+		createStudentInfoAction,
 		initialState
 	);
 	const router = useRouter();
@@ -28,7 +28,7 @@ export const StudentCreateForm = ({ teachers }) => {
 		if (state?.message) {
 			swAlert(state.message, state.ok ? "success" : "error");
 			if (state.ok) {
-				router.push("/dashboard/student");
+				router.push("/dashboard/student-info");
 			}
 		}
 	}, [state]);
@@ -36,113 +36,68 @@ export const StudentCreateForm = ({ teachers }) => {
 	return (
 		<FormContainer>
 			<Form action={formAction}>
-				<TextInput
-					label="First Name"
-					name="name"
-					error={state?.errors?.name}
-					defaultValue={state?.data?.name ?? ""}
-				/>
-				<TextInput
-					label="Last Name"
-					name="surname"
-					error={state?.errors?.surname}
-					defaultValue={state?.data?.surname ?? ""}
+				<SelectInput
+					name="lessonId"
+					label="Lesson"
+					error={state?.errors?.lessonId}
+					options={lessons}
+					optionLabel="lessonName"
+					optionValue="lessonId"
+					defaultValue={state?.data?.lessonId ?? ""}
+					key={`lessonId-${isLoading}`}
 				/>
 
 				<SelectInput
-					name="gender"
-					label="Gender"
-					error={state?.errors?.gender}
-					options={appConfig.genders}
+					name="studentId"
+					label="Student"
+					error={state?.errors?.studentId}
+					options={students}
 					optionLabel="label"
 					optionValue="value"
-					defaultValue={state?.data?.gender ?? ""}
-					key={`gender-${isLoading}`}
-				/>
-
-				<DateInput
-					label="Date of birth"
-					name="birthDay"
-					error={state?.errors?.birthDay}
-					dateFormat="yy-mm-dd"
-					defaultValue={state?.data?.birthDay ?? ""}
-					key={`birthDay-${isLoading}`}
-				/>
-
-				<TextInput
-					label="Place of birth"
-					name="birthPlace"
-					error={state?.errors?.birthPlace}
-					defaultValue={state?.data?.birthPlace ?? ""}
-				/>
-
-				<TextInput
-					label="Email"
-					name="email"
-					error={state?.errors?.email}
-					defaultValue={state?.data?.email ?? ""}
+					defaultValue={state?.data?.studentId ?? ""}
+					key={`studentId-${isLoading}`}
 				/>
 
 				<SelectInput
-					name="advisorTeacherId"
-					label="Advisor"
-					error={state?.errors?.advisorTeacherId}
-					options={teachers}
+					name="educationTermId"
+					label="Term"
+					error={state?.errors?.educationTermId}
+					options={terms}
 					optionLabel="label"
 					optionValue="value"
-					defaultValue={state?.data?.advisorTeacherId ?? ""}
-					key={`advisorTeacherId-${isLoading}`}
-				/>
-
-				<MaskedInput
-					label="Phone number"
-					name="phoneNumber"
-					error={state?.errors?.phoneNumber}
-					mask="999-999-9999"
-					value={state?.data?.phoneNumber ?? ""}
-				/>
-
-				<MaskedInput
-					label="SSN"
-					name="ssn"
-					error={state?.errors?.ssn}
-					mask="999-99-9999"
-					value={state?.data?.ssn ?? ""}
+					defaultValue={state?.data?.educationTermId ?? ""}
+					key={`educationTermId-${isLoading}`}
 				/>
 
 				<TextInput
-					label="Father Name"
-					name="fatherName"
-					error={state?.errors?.fatherName}
-					defaultValue={state?.data?.fatherName ?? ""}
+					label="Absentee"
+					name="absentee"
+					error={state?.errors?.absentee}
+					defaultValue={state?.data?.absentee ?? ""}
+					type="number"
 				/>
 
 				<TextInput
-					label="Mother Name"
-					name="motherName"
-					error={state?.errors?.motherName}
-					defaultValue={state?.data?.motherName ?? ""}
+					label="Midterm Exam"
+					name="midtermExam"
+					error={state?.errors?.midtermExam}
+					defaultValue={state?.data?.midtermExam ?? ""}
+					type="number"
 				/>
 
 				<TextInput
-					label="Username"
-					name="username"
-					error={state?.errors?.username}
-					defaultValue={state?.data?.username ?? ""}
+					label="Final Exam"
+					name="finalExam"
+					error={state?.errors?.finalExam}
+					defaultValue={state?.data?.finalExam ?? ""}
+					type="number"
 				/>
 
-				<PasswordInput
-					label="Password"
-					name="password"
-					error={state?.errors?.password}
-					defaultValue={state?.data?.password ?? ""}
-				/>
-
-				<PasswordInput
-					label="Confirm password"
-					name="confirmPassword"
-					error={state?.errors?.confirmPassword}
-					defaultValue={state?.data?.confirmPassword ?? ""}
+				<TextInput
+					label="Info"
+					name="infoNote"
+					error={state?.errors?.infoNote}
+					defaultValue={state?.data?.infoNote ?? ""}
 				/>
 
 				<ButtonGroup className="w-100">
