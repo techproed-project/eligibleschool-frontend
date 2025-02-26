@@ -8,7 +8,12 @@ import {
 } from "@/helpers/form-validation";
 import { ChooseLessonSchema } from "@/helpers/schemes/choose-lesson-schema";
 import { StudentSchema } from "@/helpers/schemes/student-schema";
-import { assignProgramToStudent, createStudent, deleteStudent, updateStudent } from "@/services/student-service";
+import {
+	assignProgramToStudent,
+	createStudent,
+	deleteStudent,
+	updateStudent,
+} from "@/services/student-service";
 import { revalidatePath } from "next/cache";
 
 export const createStudentAction = async (prevState, formData) => {
@@ -65,8 +70,17 @@ export const assignProgramToStudentAction = async (prevState, formData) => {
 	try {
 		ChooseLessonSchema.validateSync(fields, { abortEarly: false });
 
-		const res = await assignProgramToStudent(fields);
+		const payload = {
+			lessonProgramId: JSON.parse(fields.lessonProgramId).map(
+				(item) => item.lessonProgramId
+			),
+		};
+
+		const res = await assignProgramToStudent(payload);
 		const data = await res.json();
+
+		console.log(data)
+
 
 		if (!res.ok) {
 			return response(false, fields, data?.message, data?.validations);

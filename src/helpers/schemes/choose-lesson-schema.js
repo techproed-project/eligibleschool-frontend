@@ -3,6 +3,6 @@ import { isStringArray } from "../misc";
 
 export const ChooseLessonSchema = Yup.object({
 	lessonProgramId: Yup.string()
-		.test("isArray", "Must be an array", (val) => isStringArray(val))
+		.test("isArray", "Required", (val) => isStringArray(val))
 		.required("Required"),
 });

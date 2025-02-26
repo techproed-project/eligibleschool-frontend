@@ -53,7 +53,6 @@ export const createTeacher = async (payload) => {
 };
 
 export const updateTeacher = async (payload) => {
-	console.log(payload)
 	return fetch(`${TEACHER_UPDATE_API_ROUTE}/${payload.id}`, {
 		method: "PUT",
 		headers: await getAuthHeader(),

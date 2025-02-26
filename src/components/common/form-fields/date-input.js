@@ -15,18 +15,12 @@ export const DateInput = (props) => {
 	} = props;
 	const [val, setVal] = useState("");
 
-	console.log("val:", val);
-	console.log("defaultValue:", defaultValue);
-
-
 
 	useEffect(() => {
 		if (defaultValue) {
 			if (isTimeValid(defaultValue)) {
-				console.log("time");
 				setVal(convertTimeToDateTime(defaultValue));
 			} else {
-				console.log("date");
 				setVal(new Date(defaultValue));
 			}
 		}

@@ -62,8 +62,6 @@ export const updateTeacherAction = async (prevState, formData) => {
 		const res = await updateTeacher(payload);
 		const data = await res.json();
 
-		console.log(data);
-
 		if (!res.ok) {
 			return response(false, fields, data?.message, data?.validations);
 		}

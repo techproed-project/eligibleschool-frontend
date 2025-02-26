@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/common/page-header";
 import { Spacer } from "@/components/common/spacer";
 import { AllProgramList } from "@/components/dashboard/choose-lesson/all-program-list";
+import { StudentProgramList } from "@/components/dashboard/choose-lesson/student-program-list";
 import {
 	getAllPrograms,
 	getProgramsByStudent,
@@ -18,13 +19,13 @@ const Page = async () => {
 		dataStudentPrograms,
 	]);
 
-	console.log(allPrograms[0].teachers)
-
 	return (
 		<>
 			<PageHeader title="Choose Lesson" />
 			<Spacer />
 			<AllProgramList allPrograms={allPrograms} />
+			<Spacer />
+			<StudentProgramList studentPrograms={studentPrograms} />
 			<Spacer />
 		</>
 	);
