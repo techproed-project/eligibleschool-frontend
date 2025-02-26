@@ -1,24 +1,22 @@
 "use client";
-import { updateStudentInfoAction } from "@/actions/student-info-action";
+import { updateMeetAction } from "@/actions/meet-action";
 import {
 	FormContainer,
 	TextInput,
-	SelectInput,
 	SubmitButton,
 	BackButton,
+	MultipleSelectInput,
+	DateInput,
 } from "@/components/common/form-fields";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-export const StudentInfoEditForm = ({ info, lessons, students, terms }) => {
-	const [state, formAction, isLoading] = useActionState(
-		updateStudentInfoAction,
-		{
-			data: info,
-		}
-	);
+export const MeetEditForm = ({ meet, students, studentsOfMeet }) => {
+	const [state, formAction, isLoading] = useActionState(updateMeetAction, {
+		data: meet,
+	});
 
 	const router = useRouter();
 
@@ -26,7 +24,7 @@ export const StudentInfoEditForm = ({ info, lessons, students, terms }) => {
 		if (state?.message) {
 			swAlert(state.message, state.ok ? "success" : "error");
 			if (state.ok) {
-				router.push("/dashboard/student-info");
+				router.push("/dashboard/meet");
 			}
 		}
 	}, [state]);
@@ -34,69 +32,51 @@ export const StudentInfoEditForm = ({ info, lessons, students, terms }) => {
 	return (
 		<FormContainer>
 			<Form action={formAction}>
-			<input type="hidden" name="id" value={info.id} />
-				<SelectInput
-					name="lessonId"
-					label="Lesson"
-					error={state?.errors?.lessonId}
-					options={lessons}
-					optionLabel="lessonName"
-					optionValue="lessonId"
-					defaultValue={state?.data?.lessonId ?? ""}
-					key={`lessonId-${isLoading}`}
-				/>
-
-				<SelectInput
-					name="studentId"
-					label="Student"
-					error={state?.errors?.studentId}
+				<input type="hidden" name="id" value={meet.id} />
+				<MultipleSelectInput
+					id="studentIds"
+					name="abc"
+					label="Students"
+					error={state?.errors?.studentIds}
 					options={students}
 					optionLabel="label"
 					optionValue="value"
-					defaultValue={state?.data?.studentId ?? ""}
-					key={`studentId-${isLoading}`}
+					values={studentsOfMeet}
 				/>
 
-				<SelectInput
-					name="educationTermId"
-					label="Term"
-					error={state?.errors?.educationTermId}
-					options={terms}
-					optionLabel="label"
-					optionValue="value"
-					defaultValue={state?.data?.educationTermId ?? ""}
-					key={`educationTermId-${isLoading}`}
+				<DateInput
+					label="Date"
+					name="date"
+					error={state?.errors?.date}
+					defaultValue={state?.data?.date ?? ""}
+					dateFormat="yy-mm-dd"
+					key={`date-${isLoading}`}
 				/>
 
-				<TextInput
-					label="Absentee"
-					name="absentee"
-					error={state?.errors?.absentee}
-					defaultValue={state?.data?.absentee ?? ""}
-					type="number"
+				<DateInput
+					label="Start"
+					name="startTime"
+					error={state?.errors?.startTime}
+					defaultValue={state?.data?.startTime ?? ""}
+					timeOnly
+					key={`startTime-${isLoading}`}
 				/>
 
-				<TextInput
-					label="Midterm Exam"
-					name="midtermExam"
-					error={state?.errors?.midtermExam}
-					defaultValue={state?.data?.midtermExam ?? ""}
-					type="number"
-				/>
-
-				<TextInput
-					label="Final Exam"
-					name="finalExam"
-					error={state?.errors?.finalExam}
-					defaultValue={state?.data?.finalExam ?? ""}
-					type="number"
+				<DateInput
+					label="End"
+					name="stopTime"
+					error={state?.errors?.stopTime}
+					defaultValue={state?.data?.stopTime ?? ""}
+					timeOnly
+					key={`stopTime-${isLoading}`}
 				/>
 
 				<TextInput
-					label="Info"
-					name="infoNote"
-					error={state?.errors?.infoNote}
-					defaultValue={state?.data?.infoNote ?? ""}
+					label="Description"
+					name="description"
+					error={state?.errors?.description}
+					defaultValue={state?.data?.description ?? ""}
+					as="textarea"
 				/>
 
 				<ButtonGroup className="w-100">
