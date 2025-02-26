@@ -62,6 +62,10 @@
 			color: $color4-op-70;
 		}
 
+		td.p-selection-column::before{
+			content: "Select";
+		}
+
 		
 	}
 }

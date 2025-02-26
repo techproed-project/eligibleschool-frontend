@@ -68,3 +68,15 @@ export const STUDENT_INFO_GET_BY_ID_API_ROUTE = `${appConfig.apiURL}/studentInfo
 export const STUDENT_INFO_CREATE_API_ROUTE = `${appConfig.apiURL}/studentInfo/save`;
 export const STUDENT_INFO_DELETE_API_ROUTE = `${appConfig.apiURL}/studentInfo/delete`;
 export const STUDENT_INFO_UPDATE_API_ROUTE = `${appConfig.apiURL}/studentInfo/update`;
+
+
+
+export const MEET_GET_BY_TEACHER_API_ROUTE = `${appConfig.apiURL}/meet/getAllMeetByAdvisorAsPage`;
+
+export const MEET_GET_BY_STUDENT_API_ROUTE = `${appConfig.apiURL}/meet/getAllMeetByStudent`;
+export const MEET_GET_BY_ID_API_ROUTE = `${appConfig.apiURL}
+/meet/getMeetById/{meetId}`;
+export const MEET_CREATE_API_ROUTE = `${appConfig.apiURL}/meet/save`;
+export const MEET_DELETE_API_ROUTE = `${appConfig.apiURL}/meet/delete`;
+export const MEET_UPDATE_API_ROUTE = `${appConfig.apiURL}/meet/update`;
+

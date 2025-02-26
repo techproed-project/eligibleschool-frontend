@@ -6,26 +6,34 @@ import { Column } from "primereact/column";
 import { useRouter } from "next/navigation";
 import { DataListHeader } from "../common/data-list-header";
 import DataListToolbar from "../common/data-list-toolbar";
-import { deleteAdminAction } from "@/actions/admin-action";
+import { deleteMeetAction } from "@/actions/meet-action";
 
-export const AdminList = ({ data }) => {
+export const MeetList = ({ data }) => {
 	const { content, totalElements, pageable, size } = data;
 	const { offset } = pageable;
 
 	const router = useRouter();
-	const pagePath = "/dashboard/admin";
+	const pagePath = "/dashboard/meet";
 
 	const toolbar = (row) => (
-		<DataListToolbar deleteAction={deleteAdminAction} id={row.id} />
+		<DataListToolbar
+			deleteAction={deleteMeetAction}
+			id={row.id}
+			editUrl={`${pagePath}/${row.id}`}
+		/>
 	);
 
 	const header = (
-		<DataListHeader title="Admins" targetUrl={`${pagePath}/new`} />
+		<DataListHeader title="Meets" targetUrl={`${pagePath}/new`} />
 	);
 	const onPage = (e) => {
 		router.push(`${pagePath}?page=${e.page}`);
 	};
 
+	const formatStudent = (row) => {
+		const { name, surname } = row.studentResponse;
+		return `${name} ${surname}`;
+	};
 	return (
 		<Container>
 			<DataTable
@@ -48,21 +56,26 @@ export const AdminList = ({ data }) => {
 					bodyClassName="index"
 				/>
 				<Column
-					field="name"
-					header="First Name"
-					bodyClassName="First Name"
-					
+					field="date"
+					header="Date"
+					bodyClassName="Date"
 				></Column>
 				<Column
-					field="surname"
-					header="Last Name"
-					bodyClassName="Last Name"
+					field="startTime"
+					header="Start"
+					bodyClassName="Start"
 				></Column>
 				<Column
-					field="username"
-					header="User Name"
-					bodyClassName="User Name"
+					field="stopTime"
+					header="End"
+					bodyClassName="End"
 				></Column>
+				<Column
+					field="description"
+					header="Description"
+					bodyClassName="Description"
+				></Column>
+
 				<Column header="" body={toolbar} />
 			</DataTable>
 		</Container>
