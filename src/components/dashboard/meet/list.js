@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { DataListHeader } from "../common/data-list-header";
 import DataListToolbar from "../common/data-list-toolbar";
 import { deleteMeetAction } from "@/actions/meet-action";
+import { formatDatell, formatTimeLT } from "@/helpers/date-time";
 
 export const MeetList = ({ data }) => {
 	const { content, totalElements, pageable, size } = data;
@@ -56,17 +57,17 @@ export const MeetList = ({ data }) => {
 					bodyClassName="index"
 				/>
 				<Column
-					field="date"
+					body={(row) => formatDatell(row.date)}
 					header="Date"
 					bodyClassName="Date"
 				></Column>
 				<Column
-					field="startTime"
+					body={(row) => formatTimeLT(row.startTime)}
 					header="Start"
 					bodyClassName="Start"
 				></Column>
 				<Column
-					field="stopTime"
+					body={(row) => formatTimeLT(row.stopTime)}
 					header="End"
 					bodyClassName="End"
 				></Column>
