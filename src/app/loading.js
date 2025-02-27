@@ -1,9 +1,9 @@
 import { ProgressSpinner } from "primereact/progressspinner";
 import React from "react";
 
-const LodingPage = () => {
+const Loading = () => {
 	return (
-		<div className="d-flex justify-content-center align-items-center h-100">
+		<div className="d-flex justify-content-center align-items-center vh-100">
 			<ProgressSpinner
 				style={{ width: "50px", height: "50px" }}
 				strokeWidth="8"
@@ -14,4 +14,4 @@ const LodingPage = () => {
 	);
 };
 
-export default LodingPage;
+export default Loading;

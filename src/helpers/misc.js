@@ -25,3 +25,11 @@ export const isStringArray = (str) => {
 		return false;
 	}
 };
+
+export const wait = (sn) => {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(true);
+		}, sn * 1000);
+	});
+};
