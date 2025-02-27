@@ -16,7 +16,7 @@ export const Welcome = () => {
 				</Col>
 				<Col>
 					<h2 className="text-secondary">
-						Welcome to the most preferred IT School
+						Welcome to the most preferred online IT School
 					</h2>
 					<p>
 						Through a combination of lectures, readings,
