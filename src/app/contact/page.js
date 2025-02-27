@@ -14,10 +14,6 @@ export const metadata = {
 
 const Page = async () => {
 
-
-    await wait(3)
-    //throw new Error("Page error");
-
 	return <>
         <PageHeader title="Contact Us" />
         <Spacer/>

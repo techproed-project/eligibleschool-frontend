@@ -16,8 +16,6 @@ const Page = async ({ searchParams }) => {
 
 	const [grades, meets] = await Promise.all([dataGrades, dataMeets]);
 
-	console.log(meets)
-
 	return (
 		<>
 			<PageHeader title="Grades &amp; Meets" />

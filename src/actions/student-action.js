@@ -79,8 +79,6 @@ export const assignProgramToStudentAction = async (prevState, formData) => {
 		const res = await assignProgramToStudent(payload);
 		const data = await res.json();
 
-		console.log(data)
-
 
 		if (!res.ok) {
 			return response(false, fields, data?.message, data?.validations);

@@ -9,7 +9,6 @@ export const fetchCache = 'default-cache';
 
 const Page = async ({ searchParams }) => {
 
-	await wait(10);
 	const { page } = await searchParams;
 	
 

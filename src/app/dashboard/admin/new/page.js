@@ -3,7 +3,7 @@ import { Spacer } from '@/components/common/spacer'
 import { AdminCreateForm } from '@/components/dashboard/admin/create-form'
 import React from 'react'
 
-const Page = () => {
+const Page = async () => {
   return (
     <>
         <PageHeader title="New Admin" />
