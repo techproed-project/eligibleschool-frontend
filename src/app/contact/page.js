@@ -10,6 +10,9 @@ export const metadata = {
 };
 
 const Page = () => {
+
+    //throw new Error("Page error");
+
 	return <>
         <PageHeader title="Contact Us" />
         <Spacer/>

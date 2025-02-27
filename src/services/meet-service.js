@@ -16,8 +16,8 @@ export const getAllIMeetsForAdvisorByPage = async (page = 0, size = 20) => {
 	});
 };
 
-export const getAllMeetsForStudent = async (id) => {
-	return fetch(`${MEET_GET_BY_STUDENT_API_ROUTE}/${id}`, {
+export const getAllMeetsForStudent = async () => {
+	return fetch(`${MEET_GET_BY_STUDENT_API_ROUTE}`, {
 		method: "GET",
 		headers: await getAuthHeader(),
 	});

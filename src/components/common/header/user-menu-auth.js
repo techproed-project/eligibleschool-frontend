@@ -2,10 +2,13 @@
 import React, { useState } from "react";
 import { Button, Nav, Offcanvas } from "react-bootstrap";
 import userMenuData from "@/helpers/data/user-menu.json";
-import Link from "next/link";
 import { ButtonLogout } from "./button-logout";
+import { usePathname, useRouter } from "next/navigation";
 
 export const UserMenuAuth = ({ session }) => {
+	const router = useRouter();
+	const pathename = usePathname();
+
 	const { name, role } = session.user;
 
 	const [show, setShow] = useState(false);
@@ -23,6 +26,11 @@ export const UserMenuAuth = ({ session }) => {
 
 	const userMenu = userMenuData[role.toLowerCase()];
 
+	const handleClick = (url) => {
+		handleClose();
+		router.push(url);
+	};
+
 	return (
 		<>
 			<Button variant="primary" size="sm" onClick={handleShow}>
@@ -36,13 +44,15 @@ export const UserMenuAuth = ({ session }) => {
 				<Offcanvas.Body>
 					<Nav className="flex-column">
 						{userMenu.map((item) => (
-							<Nav.Link
-								href={item.link}
+							<button
 								key={item.link}
-								as={Link}
+								onClick={() => handleClick(item.link)}
+								className={`nav-link text-start ${
+									pathename === item.link ? "active" : ""
+								}`}
 							>
 								{item.title}
-							</Nav.Link>
+							</button>
 						))}
 						<ButtonLogout className="mt-4" />
 					</Nav>
